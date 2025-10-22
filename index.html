@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meu Portfólio - Projetos Shopee</title>
+  <title>Portfólio - Projetos Shopee</title>
   <link rel="stylesheet" href="index.css" />
 </head>
 <body>
   <div class="container">
-    <!-- Sidebar Menu -->
+    <!-- Sidebar (como na SEGUNDA FOTO - com ícones, fundo branco, hover animado) -->
     <div class="sidebar">
       <div class="logo">
         <h1>💼 Meu Portfólio</h1>
@@ -21,8 +21,8 @@
       </div>
       
       <div class="menu-item" onclick="showProject('project1', this)">
-        <h3>📊 Sistema de Analytics</h3>
-        <p>Plataforma de análise em tempo real</p>
+        <h3>📊 Projeto 1</h3>
+        <p>Plataforma de analytics</p>
       </div>
       
       <div class="menu-item" onclick="showProject('project2', this)">
@@ -63,7 +63,7 @@
 
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Welcome Section -->
+      <!-- Capa inicial (como na SEGUNDA FOTO) -->
       <div class="project-section active" id="welcome">
         <div class="welcome-section">
           <h1>🎨 Bem-vindo ao Meu Portfólio!</h1>
@@ -72,191 +72,163 @@
           <div class="welcome-cards">
             <div class="welcome-card">
               <h3>8</h3>
-              <p>Projetos</p>
+              <p>Projetos Incríveis</p>
             </div>
+           
           </div>
         </div>
       </div>
 
-      <!-- PROJETO 1 - Conteúdo detalhado do seu primeiro HTML -->
+      <!-- PROJETO 1 - EXATAMENTE como no seu primeiro HTML -->
       <div class="project-section" id="project1">
-        <div class="project-header">
-          <h2>📊 Sistema de Analytics</h2>
-          
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Desenvolvi uma plataforma completa de analytics para monitoramento de vendas e comportamento de usuários na Shopee. O sistema processa mais de 5 milhões de eventos por dia e é utilizado por 200+ colaboradores.</p>
-            <p>O projeto reduziu o tempo de análise de dados em 70% e permitiu tomadas de decisão baseadas em informações em tempo real, resultando em um aumento de 25% na eficiência operacional.</p>
+        <div class="project-hero">
+          <h1>Sistema de Analytics</h1>
+          <p class="subtitle">Plataforma de análise de dados em tempo real</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>Resumo Executivo</h2>
+          <p>Desenvolvi uma plataforma completa de analytics para monitoramento de vendas e comportamento de usuários na Shopee. O sistema processa mais de 5 milhões de eventos por dia e é utilizado por 200+ colaboradores.</p>
+          <p>O projeto reduziu o tempo de análise de dados em 70% e permitiu tomadas de decisão baseadas em informações em tempo real, resultando em um aumento de 25% na eficiência operacional.</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <div class="image-placeholder">📊 Imagem 1</div>
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Dashboard Principal</h3>
+            <p>Interface principal do sistema mostrando métricas em tempo real. Os gráficos são totalmente interativos e se atualizam automaticamente a cada 5 segundos.</p>
+            <p>Permite aos usuários monitorar vendas, conversões e comportamento de forma visual e intuitiva, com drill-down em múltiplos níveis de detalhe.</p>
           </div>
         </div>
 
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <h1>aqui vc coloca a descricao do projeto</h1>
-          
-          
-          <div class="image-gallery">
-            <div class="image-card">
-              <div class="image-placeholder">📊 Imagem 1</div>
-              <div class="image-caption">
-                <h4>Dashboard Principal</h4>
-                <p>Interface principal do sistema mostrando métricas em tempo real. Os gráficos são totalmente interativos e se atualizam automaticamente a cada 5 segundos.</p>
-              </div>
-            </div>
-            
-            <div class="image-card">
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
               <div class="image-placeholder">🔄 Imagem 2</div>
-              <div class="image-caption">
-                <h4>Pipeline de Processamento</h4>
-                <p>Arquitetura do sistema de ETL que coleta dados de 15 fontes diferentes e processa em tempo real.</p>
-              </div>
             </div>
-            
-            <div class="image-card">
+          </div>
+          <div class="text-wrapper">
+            <h3>Pipeline de Processamento</h3>
+            <p>Arquitetura do sistema de ETL que coleta dados de 15 fontes diferentes e processa em tempo real.</p>
+            <p>Implementei um sistema de filas que garante zero perda de dados mesmo em picos de 10 mil eventos por segundo. O pipeline é totalmente escalável e resiliente.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
               <div class="image-placeholder">📈 Imagem 3</div>
-              <div class="image-caption">
-                <h4>Análise Preditiva</h4>
-                <p>Modelos de machine learning que preveem tendências de vendas com 85% de acurácia.</p>
-              </div>
             </div>
-            
-            <div class="image-card">
+          </div>
+          <div class="text-wrapper">
+            <h3>Análise Preditiva</h3>
+            <p>Modelos de machine learning que preveem tendências de vendas com 85% de acurácia. O sistema analisa padrões históricos e identifica automaticamente anomalias.</p>
+            <p>Gera insights acionáveis e recomendações para a equipe comercial baseadas em análise de dados em tempo real.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
               <div class="image-placeholder">🚨 Imagem 4</div>
-              <div class="image-caption">
-                <h4>Sistema de Alertas</h4>
-                <p>Painel de notificações inteligentes que monitora métricas críticas e envia alertas priorizados.</p>
-              </div>
             </div>
-            
-            <div class="image-card">
+          </div>
+          <div class="text-wrapper">
+            <h3>Sistema de Alertas</h3>
+            <p>Painel de notificações inteligentes que monitora métricas críticas e envia alertas priorizados via Slack e email.</p>
+            <p>O sistema reduziu o tempo de resposta a incidentes em 90%, permitindo ação preventiva antes que problemas afetem usuários finais.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
               <div class="image-placeholder">📱 Imagem 5</div>
-              <div class="image-caption">
-                <h4>Versão Mobile</h4>
-                <p>Interface responsiva totalmente otimizada para dispositivos móveis.</p>
-              </div>
             </div>
           </div>
-
-          <div class="tech-stack">
-            <span class="tech-badge">React</span>
-            <span class="tech-badge">TypeScript</span>
-            <span class="tech-badge">Python</span>
-            <span class="tech-badge">Apache Kafka</span>
-            <span class="tech-badge">Redis</span>
-            <span class="tech-badge">PostgreSQL</span>
-            <span class="tech-badge">Docker</span>
-            <span class="tech-badge">TensorFlow</span>
-            <span class="tech-badge">Chart.js</span>
-            <span class="tech-badge">WebSocket</span>
+          <div class="text-wrapper">
+            <h3>Versão Mobile</h3>
+            <p>Interface responsiva totalmente otimizada para dispositivos móveis. Permite que gestores monitorem métricas em qualquer lugar.</p>
+            <p>Implementei sincronização em tempo real entre todos os dispositivos, garantindo que os dados estejam sempre atualizados.</p>
           </div>
+        </div>
 
+        <div class="tech-section">
+          <h3>🔧 Tecnologias Utilizadas</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">React</span>
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Apache Kafka</span>
+            <span class="tech-tag">Redis</span>
+            <span class="tech-tag">PostgreSQL</span>
+            <span class="tech-tag">Docker</span>
+            <span class="tech-tag">TensorFlow</span>
+            <span class="tech-tag">Chart.js</span>
+            <span class="tech-tag">WebSocket</span>
+          </div>
+        </div>
+
+        <div class="project-footer">
           <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
 
-      <!-- Projetos 2-8 (placeholders) -->
+      <!-- Projetos 2-8 (como no seu primeiro HTML) -->
       <div class="project-section" id="project2">
-        <div class="project-header">
-          <h2>🚀 Projeto 2</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
+        <div class="project-hero">
+          <h1>Projeto 2</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="executive-summary">
+          <h2>Resumo Executivo</h2>
+          <p>Seu resumo aqui...</p>
         </div>
       </div>
 
       <div class="project-section" id="project3">
-        <div class="project-header">
-          <h2>💡 Projeto 3</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="project-hero">
+          <h1>Projeto 3</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
       </div>
 
       <div class="project-section" id="project4">
-        <div class="project-header">
-          <h2>⚡ Projeto 4</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="project-hero">
+          <h1>Projeto 4</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
       </div>
 
       <div class="project-section" id="project5">
-        <div class="project-header">
-          <h2>🎯 Projeto 5</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="project-hero">
+          <h1>Projeto 5</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
       </div>
 
       <div class="project-section" id="project6">
-        <div class="project-header">
-          <h2>🌟 Projeto 6</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="project-hero">
+          <h1>Projeto 6</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
       </div>
 
       <div class="project-section" id="project7">
-        <div class="project-header">
-          <h2>🔥 Projeto 7</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="project-hero">
+          <h1>Projeto 7</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
       </div>
 
       <div class="project-section" id="project8">
-        <div class="project-header">
-          <h2>✨ Projeto 8</h2>
-          <div class="executive-summary">
-            <h3>Resumo Executivo</h3>
-            <p>Conteúdo em desenvolvimento...</p>
-          </div>
-        </div>
-        <div class="project-details">
-          <h3>🎯 Detalhes do Projeto</h3>
-          <p>Este projeto ainda está sendo documentado.</p>
-          <a href="#" class="project-link">🔗 Ver Projeto Completo</a>
+        <div class="project-hero">
+          <h1>Projeto 8</h1>
+          <p class="subtitle">Descrição breve</p>
         </div>
       </div>
     </div>
