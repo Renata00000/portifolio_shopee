@@ -11,37 +11,37 @@
     <!-- Sidebar (como na SEGUNDA FOTO - com ícones, fundo branco, hover animado) -->
     <div class="sidebar">
       <div class="logo">
-        <h1>💼 Meu Portfólio</h1>
+        <h1>💼 Portfólio</h1>
         <p>Projetos Shopee</p>
       </div>
       
       <div class="menu-item active" onclick="showProject('welcome', this)">
         <h3>🏠 Início</h3>
-        <p>Bem-vindo ao portfólio</p>
+        <p>Portfólio</p>
       </div>
       
       <div class="menu-item" onclick="showProject('project1', this)">
-        <h3>📊 LPR </h3>
+        <h3>🌟 LPR </h3>
         <p>Plataforma de analytics</p>
       </div>
       
       <div class="menu-item" onclick="showProject('project2', this)">
-        <h3>🚀 FLUXO </h3>
+        <h3>🌟 FLUXO </h3>
         <p>Clique para ver detalhes</p>
       </div>
       
       <div class="menu-item" onclick="showProject('project3', this)">
-        <h3>💡PAINEL DE CAMERAS </h3>
+        <h3>🌟 PAINEL DE CAMERAS </h3>
         <p>Clique para ver detalhes</p>
       </div>
       
       <div class="menu-item" onclick="showProject('project4', this)">
-        <h3>⚡MAPA LOGISTICO </h3>
+        <h3>🌟 MAPA LOGISTICO </h3>
         <p>Clique para ver detalhes</p>
       </div>
       
       <div class="menu-item" onclick="showProject('project5', this)">
-        <h3>🎯 FORNECEDOR </h3>
+        <h3>🌟FORNECEDOR </h3>
         <p>Clique para ver detalhes</p>
       </div>
       
@@ -49,19 +49,25 @@
         <h3>🌟SP2, </h3>
         <p>Clique para ver detalhes</p>
       </div>
+
+      <div class="menu-item" onclick="showProject('project6', this)">
+        <h3>🌟PORTIFOLIO, </h3>
+        <p>Clique para ver detalhes</p>
+      </div>
       
       <div class="menu-item" onclick="showProject('project7', this)">
-        <h3>🔥IA</h3>
+        <h3>🌟IA</h3>
         <p>Clique para ver detalhes</p>
       </div>
     </div>
+    
 
     <!-- Main Content -->
     <div class="main-content">
       <!-- Capa inicial (como na SEGUNDA FOTO) -->
       <div class="project-section active" id="welcome">
         <div class="welcome-section">
-          <h1>🎨 Bem-vindo ao Meu Portfólio!</h1>
+          <h1>🎨Portfólio!</h1>
           <p>Projetos que desenvolvi na Shopee. 2025</p>
           
           
@@ -91,32 +97,33 @@
         </div>
       </div>
 
-      <!-- PROJETO 1 - EXATAMENTE como no seu primeiro HTML -->
+      <!-- PROJETO 1  -->
       <div class="project-section" id="project1">
         <div class="project-hero">
-          <h1>Sistema de Analytics</h1>
-          <p class="subtitle">Plataforma de análise de dados em tempo real</p>
+          <h1>LPR – Sistema de Analytics</h1>
+          <p class="subtitle">Plataforma inteligente para análise e auditoria automatizada de dados operacionais em tempo real.</p>
         </div>
 
         <div class="executive-summary">
           <h2>🧩 Detalhes do Projeto </h2>
-          <p>Desenvolvi um sistema de Analytics para monitorar métricas operacionais e comportamentais relacionadas a ocorrências logísticas e de segurança.
-A plataforma foi projetada para processar grandes volumes de dados em tempo real, permitindo que gestores visualizem indicadores de desempenho, detecção de fraudes e padrões de comportamento por meio de dashboards interativos e dinâmicos.</p>
-          <p>O sistema integra dados provenientes de múltiplas fontes, realizando a consolidação via pipeline de processamento ETL, o que reduz o tempo de análise e garante maior precisão na tomada de decisão.
-Entre os resultados obtidos estão a redução do tempo de diagnóstico operacional, o aumento da eficiência nas investigações de eventos críticos e a identificação de motoristas reincidentes ou com padrões de risco.</p>
+          <p>O sistema LPR Analytics foi desenvolvido para automatizar auditorias e análises de dados entre as bases SPX e LPR, integrando informações logísticas, operacionais e de segurança em uma única plataforma inteligente.
+          A solução processa milhares de registros mensais, cruzando dados de motoristas, veículos e eventos para detectar fraudes, divergências e padrões anômalos de comportamento</p>
+          <p>O sistema realiza todo o pipeline de ingestão, transformação e análise — gerando relatórios técnicos automatizados (TXT/PDF) e um resumo executivo via e-mail, com métricas de desempenho, impacto financeiro e indicadores de risco.
+          Além de reduzir significativamente o tempo de auditoria, o projeto aumenta a precisão das investigações, aprimora o controle de acesso logístico e fornece uma base sólida para tomadas de decisão orientadas por dados.</p>
         </div>
 
         <div class="content-row left-image">
           <div class="image-wrapper">
             <div class="image-frame">
-              <div class="image-placeholder">📊 Imagem 1</div>
+              <img src="img/spx_lpr.png" alt="planilhas de LPR e SPX">
             </div>
           </div>
           <div class="text-wrapper">
-            <h3>Múltiplas ATs</h3>
-            <p>O dashboard apresenta a análise cruzada entre dias da semana e horários de ocorrência de eventos.
-Os gráficos mostram o volume de ATs (ocorrências) em diferentes períodos, destacando picos de incidência e correlação entre motoristas e horários críticos.
-Essa visualização permitiu identificar padrões de comportamento recorrentes, facilitando a criação de alertas preventivos e o planejamento de ações corretivas.</p>
+            <h3>Bases SPX e LPR — estrutura de origem dos dados</h3>
+            <p>O projeto teve início a partir da integração das bases SPX e LPR — fontes primárias do sistema —, que reúnem entre 6 e 20 mil registros mensais de motoristas, veículos, categorias e eventos operacionais.
+            A SPX concentra dados logísticos e operacionais, enquanto a LPR registra as leituras automáticas de placas nas unidades.</p>
+            <p>O cruzamento dessas bases possibilitou a construção de um pipeline de auditoria automatizado, projetado para validar categorias, detectar anomalias e identificar fraudes com alta precisão.
+            Essa integração transformou dados brutos em insights estratégicos, permitindo análises escaláveis de desempenho, risco e comportamento operacional.</p>
           </div>
         </div>
 
@@ -127,10 +134,10 @@ Essa visualização permitiu identificar padrões de comportamento recorrentes, 
               </div>
             </div>
           <div class="text-wrapper">
-            <h3>Veículos Indevidos / Categorias Divergentes</h3>
-            <p>Este mosaico consolida indicadores de fraudes e classificações de veículos indevidos.
-            O painel exibe o impacto financeiro por motorista, taxas de fraude, categorias de problemas e motoristas reincidentes, permitindo uma visão clara sobre os principais pontos de atenção operacional.
-            A análise contribuiu para a redução de inconsistências nos cadastros, identificação de falhas sistêmicas e melhoria dos processos de controle e validação de acessos.</p>
+            <h3>🚘 Veículos Indevidos / Categorias Divergentes</h3>
+            <p>Este painel consolida os principais indicadores de fraude e divergência de categoria entre as bases SPX e LPR.
+            Ele exibe impacto financeiro por motorista, taxa de fraude, categorias problemáticas e horários de pico de ocorrência, permitindo uma visão dos pontos críticos de controle..</p>
+            <p>Todos os cálculos e gráficos foram gerados automaticamente a partir dos dados tratados em Python (Pandas e NumPy), com visualizações desenvolvidas em Matplotlib e Seaborn.
           </div>
         </div>
 
@@ -141,36 +148,103 @@ Essa visualização permitiu identificar padrões de comportamento recorrentes, 
             </div>
           </div>
           <div class="text-wrapper">
-            <h3>Múltiplas ATs</h3>
-            <p>Este mosaico consolida indicadores de fraudes e classificações de veículos indevidos.
-            O painel exibe o impacto financeiro por motorista, taxas de fraude, categorias de problemas e motoristas reincidentes, permitindo uma visão clara sobre os principais pontos de atenção operacional.
-            A análise contribuiu para a redução de inconsistências nos cadastros, identificação de falhas sistêmicas e melhoria dos processos de controle e validação de acessos.</p>
+            <h3>📊 Múltiplas ATs — Análise Temporal de Atividades</h3>
+            <p>Neste painel, o foco é a análise de motoristas com múltiplas atividades (ATs) no mesmo intervalo de tempo, algo que pode indicar falhas operacionais ou tentativas de fraude.
+            A análise temporal identifica padrões atípicos e recorrências, evidenciando picos de atividade simultânea e leituras duplicadas.</p>
+            <p>A detecção é realizada por meio de um mecanismo de correlação cruzada entre SPX e LPR, utilizando janelas deslizantes (sliding window) e regras de correspondência temporal com tolerância de minutos, garantindo precisão e performance mesmo com grandes volumes de dados.</p>
+          </div>
+        </div>
+
+         <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+                <img src="img/txt.png" alt="TXT. imagem com tds">
+              </div>
+            </div>
+          <div class="text-wrapper">
+            <h3>Relatórios TXT</h3>
+            <p>Cada execução do sistema gera automaticamente um conjunto completo de relatórios em formato TXT, contendo desde métricas de desempenho da câmera LPR até análises detalhadas de veículos indevidos, motoristas falsificados e alertas de fraude.
+            Esses arquivos são estruturados para uso técnico e auditoria, permitindo rastrear cada evento, divergência e cálculo financeiro com precisão.</p>
+            <p>Os relatórios são o ponto de integração entre a análise automatizada e as equipes operacionais, servindo como base para o envio dos PDFs executivos e do e-mail automatizado.
+            Além de reduzir o tempo de verificação manual, consolidam informações de milhares de registros em minutos, garantindo consistência, transparência e rastreabilidade total dos resultados.</p>
+          </div>
+        </div>
+
+        <div class="content-row laft-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/html.png" alt="corpo do email">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>📧 E-mail Automatizado com Relatórios SPX × LPR</h3>
+            <p>O envio automático de relatórios marca o fechamento do ciclo de auditoria.
+            cada execução, o sistema compila as análises, gera os arquivos TXT e PDF e envia um resumo executivo por e-mail, contendo métricas como taxa de fraude, impacto financeiro e divergências encontradas.</p>
+            <p>O e-mail é formatado em HTML responsivo, com branding Shopee e link direto para o Google Sheets via API, permitindo acesso rápido aos dados completos.
+            Essa automação elimina etapas manuais e garante que as áreas responsáveis recebam informações precisas e atualizadas em tempo real.</p>
+          </div>
+        </div>
+
+       
+
+       
+        <div class="project-footer">
+          <a href="https://exemplo.com" class="project-link">🔗 Ver Documentacao</a>
+        </div>
+      </div>
+
+
+      <!-- PROJETO 2 -->
+      <div class="project-section" id="project2">
+        <div class="project-hero">
+          <h1>FLUXO</h1>
+          <p class="subtitle">Descrição breve do projeto</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>O projeto Central de Segurança – Dashboard Operacional e Estrutural nasceu da necessidade de organizar e padronizar toda a operação da CCO (Central de Controle Operacional) — um setor que, até então, funcionava sem fluxos, sem registros e sem documentação.</p>
+          <p>Cada rotina foi mapeada diretamente com os operadores e gestores, transformando o conhecimento verbal em processos estruturados, visuais e interativos.
+O resultado é uma plataforma centralizada onde cada processo da CCO é documentado em quatro camadas: descrição detalhada, fluxograma operacional, ferramentas utilizadas e perguntas frequentes.</p>
+          <p>Além dos processos, o sistema conta com um organograma dinâmico, que mostra em tempo real a hierarquia da central — incluindo foto, cargo, turno e funções de cada colaborador, reveladas ao passar o cursor sobre o card.
+Essa integração entre estrutura humana e estrutura operacional trouxe clareza, autonomia e transparência, tornando a CCO mais eficiente, rastreável e preparada para auditorias e treinamentos.</p>
+           <p>O projeto consolidou um ambiente antes desorganizado em uma base sólida de gestão operacional, eliminando a dependência de repasses verbais e transformando a rotina em um fluxo padronizado, visual e acessível a todos os níveis da equipe.</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fluxo1.png" alt="tela inicial organo de pessoas">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Organograma CCO</h3>
+            <p>Representação hierárquica da Central de Controle Operacional. Cada membro é exibido com foto, cargo e turno, e ao passar o cursor o card se expande, revelando funções e responsabilidades. Uma visão clara da estrutura humana e dos vínculos entre equipes.</p>
           </div>
         </div>
 
         <div class="content-row right-image">
           <div class="image-wrapper">
             <div class="image-frame">
-              <div class="image-placeholder">🚨 Imagem 4</div>
+              <img src="img/fluxo2.png" alt="painel de processos">
             </div>
           </div>
           <div class="text-wrapper">
-            <h3>Sistema de Alertas</h3>
-            <p>Painel de notificações inteligentes que monitora métricas críticas e envia alertas priorizados via Slack e email.</p>
-            <p>O sistema reduziu o tempo de resposta a incidentes em 90%, permitindo ação preventiva antes que problemas afetem usuários finais.</p>
+            <h3>Painel de Processos Operacionais</h3>
+            <p>Painel principal com todos os fluxos operacionais mapeados e padronizados. Cada card representa um processo completo da CCO, permitindo navegação direta para rotinas específicas como monitoramento, controle de acesso e tratativas de incidentes.</p>
           </div>
         </div>
 
         <div class="content-row left-image">
           <div class="image-wrapper">
             <div class="image-frame">
-              <div class="image-placeholder">📱 Imagem 5</div>
+              <img src="img/fluxo3.png" alt="fluxo aberto">
             </div>
           </div>
+
           <div class="text-wrapper">
-            <h3>Versão Mobile</h3>
-            <p>Interface responsiva totalmente otimizada para dispositivos móveis. Permite que gestores monitorem métricas em qualquer lugar.</p>
-            <p>Implementei sincronização em tempo real entre todos os dispositivos, garantindo que os dados estejam sempre atualizados.</p>
+            <h3>Processo Detalhado Aberto</h3>
+            <p>Exemplo de processo operacional aberto no sistema. A página exibe o fluxograma, descrição, ferramentas utilizadas e FAQ, oferecendo uma visão completa e padronizada de cada rotina da central.</p>
           </div>
         </div>
 
@@ -180,57 +254,509 @@ Essa visualização permitiu identificar padrões de comportamento recorrentes, 
         </div>
       </div>
 
-      <!-- Projetos 2-8 (como no seu primeiro HTML) -->
-      <div class="project-section" id="project2">
-        <div class="project-hero">
-          <h1>Projeto 2</h1>
-          <p class="subtitle">Descrição breve</p>
-        </div>
-        <div class="executive-summary">
-          <h2>Resumo Executivo</h2>
-          <p>Seu resumo aqui...</p>
-        </div>
-      </div>
 
+      <!-- PROJETO 3 -->
       <div class="project-section" id="project3">
         <div class="project-hero">
-          <h1>Projeto 3</h1>
-          <p class="subtitle">Descrição breve</p>
+          <h1>🎥 3. VisionSafe DSS Monitor – Painel de Câmeras</h1>
+          <p class="subtitle">Plataforma de monitoramento inteligente integrada à API Dahua, com alertas em tempo real e rastreabilidade de tratativas.</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>O Sentinel View foi desenvolvido para resolver um dos maiores gargalos operacionais da Central de Controle — a ausência de visibilidade e rastreabilidade sobre o status das câmeras Dahua DSS.
+           Antes do sistema, a identificação de câmeras offline dependia de verificação manual na árvore de dispositivos, um processo demorado, sujeito a falhas e que muitas vezes só era percebido após a ocorrência de eventos críticos.</p>
+          <p>A nova plataforma centraliza o monitoramento nacional, exibindo em tempo real o total de câmeras online, offline e obstruídas, além de gerar alertas automáticos e registrar tratativas por operador autenticado via token individual.
+          Cada ação é registrada em histórico detalhado, garantindo rastreabilidade e responsabilidade nas tratativas. O sistema também conta com um chat interno para anotações e acompanhamento de manutenção, facilitando a comunicação entre turnos e a continuidade das ações.</p>
+          <p>O painel trouxe maior eficiência, eliminou a dependência de rondas manuais e criou uma base confiável de controle visual, permitindo decisões rápidas e redução de riscos operacionais.</p>
+        </div>
+
+
+          <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/painel01.png" alt="Descrição da imagem 2">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Painel Original do DSS Dahua (Antes da Automação)</h3>
+            <p>Interface nativa de monitoramento utilizada pela CCO para acompanhamento das câmeras em todas as unidades operacionais (SOCs, Hubs, Big Hubs e Fulfillment).
+            O sistema exibe apenas o total consolidado de câmeras ativas e inoperantes (ex.: 23/234), sem indicar a localização das falhas.
+            Para identificar quais unidades e dispositivos estavam em estado OFF, o operador precisava abrir manualmente a árvore hierárquica de cada local e verificar câmera por câmera — processo demorado, repetitivo e propenso a erro humano.</p>
+           </div>
+        </div>
+
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/painel1.png" alt="Descrição da imagem 1">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Tela de Login do Novo Sistema</h3>
+            <p>Ponto de partida do sistema, com autenticação segura e integração direta à API Dahua DSS — garantindo acesso controlado ao ambiente de monitoramento.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/painel2.png" alt="Descrição da imagem 2">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Painel de Monitoramento Automatizado</h3>
+            <p>Visão unificada de status das câmeras em tempo real, classificadas em ativas, inoperantes e obstruídas.
+            O painel consolida informações de todas as unidades, elimina a necessidade de navegação manual e exibe métricas atualizadas a partir da API.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/painel03.png" alt="Descrição da imagem 1">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Sistema de Tratativas e Chat Operacional</h3>
+            <p>Sistema de registro e comunicação integrado, que autentica cada ação por token de operador.
+             Permite acompanhar tratativas em andamento, troca de identificações e histórico completo de interações, garantindo rastreabilidade entre turnos</p>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
 
+
+      <!-- PROJETO 4 -->
       <div class="project-section" id="project4">
         <div class="project-hero">
-          <h1>Projeto 4</h1>
-          <p class="subtitle">Descrição breve</p>
+          <h1>Título do Projeto 4</h1>
+          <p class="subtitle">Descrição breve do projeto</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>Plataforma web interativa desenvolvida para centralizar e gerenciar todas as unidades logísticas da Shopee no Brasil, oferecendo uma visão completa e em tempo real das operações.</p>
+          <p>O sistema apresenta um mapa dinâmico do país, dividido por regiões e estados, onde cada área é totalmente interativa. Ao passar o cursor, a região é destacada; ao clicar, o sistema exibe um modal inteligente com as cidades correspondentes e suas respectivas unidades — incluindo SOCs, Hubs, Big Hubs e FFs.</p>
+          <p>Cada unidade pode ser explorada de forma agrupada ou detalhada, exibindo endereço, responsável, contatos e status operacional, eliminando a necessidade de consultar planilhas separadas ou links dispersos.</p>
+          <p>Além do mapa operacional, a solução inclui um Painel Administrativo com autenticação segura, permitindo o cadastro, edição e atualização das informações diretamente pela interface, sem depender de bases externas.</p>
+          <p>Antes da implementação, os dados logísticos estavam fragmentados em múltiplas planilhas e documentos, tornando a localização e atualização das informações um processo lento e suscetível a erros. Com o novo sistema, todo o controle logístico nacional foi unificado, padronizado e automatizado, proporcionando mais agilidade, rastreabilidade e precisão nas operações da Shopee Brasil.</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa01.png" alt="base de dados de onde pega as informacoes antes do mapa">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Bases de Dados Originais</h3>
+            <p>Visualização das planilhas que antes concentravam as informações das unidades logísticas da Shopee. Cada arquivo continha dados isolados — endereços, contatos e tipos de unidades — exigindo múltiplas consultas e tornando o processo de atualização e auditoria operacional ineficiente.
+             Essa base desestruturada foi o ponto de partida para o desenvolvimento do novo sistema centralizado.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa2.png" alt="tela de inicio, mapa">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Mapa Logístico Nacional</h3>
+            <p>Tela inicial do sistema, exibindo um mapa do Brasil dividido por regiões e estados. Cada área é interativa e colorida conforme sua macro-região, permitindo uma visão consolidada de todas as operações logísticas. No topo/painel lateral são apresentados contadores agregados por tipo de unidade (SOC, Hub, Big Hub, FF), oferecendo um resumo instantâneo da frota de filiais espalhadas pelo país. Essa visão combinada — mapa geográfico + painel de contagem — permite identificar rapidamente cobertura, densidade operacional por região e priorizar buscas ou ações administrativas.</p>
+          </div>
+        </div>
+
+         <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa3.png" alt="mapa com a regiao destacada">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Destaque de Região Interativa</h3>
+            <p>Demonstração da função de hover interativo, em que ao posicionar o cursor sobre uma região, ela ganha destaque visual enquanto as demais são suavizadas.
+            Esse comportamento foi projetado para facilitar a localização geográfica e o reconhecimento rápido das zonas operacionais, garantindo uma navegação fluida e intuitiva.</p>
+          </div>
+        </div>
+
+         <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa02.png" alt="mapa com o estado destacado">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Seleção de Estado</h3>
+            <p>Ao clicar em um estado, o sistema aplica um realce exclusivo e ativa a lógica de carregamento dinâmico das cidades disponíveis naquela área.
+             Essa camada de interação combina animações e controle de estado via React, otimizando a experiência do usuário e tornando o processo de consulta direto e visualmente claro.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa4.png" alt="modal de unidades aberto">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Modal de Cidades e Unidades</h3>
+            <p>Após selecionar um estado, o sistema exibe um modal listando todas as cidades que possuem unidades logísticas da Shopee, categorizadas por tipo (Hubs, Big Hubs, SOCs e FFs).
+             Essa estrutura modular permite tanto a consulta por grupo quanto a análise detalhada por unidade, centralizando informações antes dispersas em diversos arquivos.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa5.png" alt="exemplo de unidades aberta unificadamente ou em lista">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Visualização Unificada de Unidades</h3>
+            <p>Demonstra a visualização expandida, onde todas as unidades de uma cidade podem ser exibidas em uma única lista consolidada.
+              Essa funcionalidade reduz o tempo de navegação e oferece uma visão completa das operações locais, integrando dados de múltiplas fontes em uma interface única e responsiva.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa6.png" alt="modal da unidade mostrando as informações">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Tela de Login Administrativo</h3>
+            <p>Tela de autenticação do painel administrativo, criada para restringir o acesso às funções de edição e cadastro.
+             A autenticação garante integridade e controle sobre as alterações, preservando a consistência dos dados operacionais.</p>
+          </div>
+        </div>
+
+
+         <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa1.png" alt="tela de login adm">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Tela de Login Administrativo</h3>
+            <p>Tela de autenticação do painel administrativo, criada para restringir o acesso às funções de edição e cadastro.
+             A autenticação garante integridade e controle sobre as alterações, preservando a consistência dos dados operacionais.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa9.png" alt="modal de cadastro aberto">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Modal de Cadastro de Unidades</h3>
+           <p>Interface de inserção e atualização de dados logísticos, permitindo registrar novas unidades ou editar informações existentes (endereço, responsável, tipo de operação, contato, etc.).
+            Esse painel substitui os cadastros manuais e descentralizados, implementando validação e persistência de dados com feedback visual em tempo real.</p>
+            
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/mapa8.png" alt="tela de cadastro aberta">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Painel Administrativo Completo</h3>
+            <p>Visão geral do painel de administração, onde todos os cadastros de unidades são listados, filtrados e gerenciados em uma interface centralizada.
+             Essa camada garante governança de dados, controle operacional e consistência entre as informações exibidas no mapa e o banco de dados administrativo.</p>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
 
+
+      <!-- PROJETO 5 -->
       <div class="project-section" id="project5">
         <div class="project-hero">
-          <h1>Projeto 5</h1>
-          <p class="subtitle">Descrição breve</p>
+          <h1>Fornecedor</h1>
+          <p class="subtitle">Descrição breve do projeto</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>Resumo executivo do projeto. Explique o objetivo, impacto e tecnologias envolvidas em 2 ou 3 parágrafos.</p>
+          <p>Continue com mais detalhes relevantes sobre escopo, desafios ou resultados obtidos.</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fornecedor1.png" alt="como era">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fornecedor1.png" alt="tela de cadastro">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+
+         <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fornecedor2.png" alt="cadastro de PDF">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fornecedor3.png" alt="pasta no driver">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fornecedor4.png" alt="tela do adm">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/fornecedor6.png" alt="tela do cliente">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+        
+      
+        <div class="project-footer">
+          <a href="img/fornecedor2.png" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
 
+
+
+
+      <!-- PROJETO 6 -->
       <div class="project-section" id="project6">
         <div class="project-hero">
-          <h1>Projeto 6</h1>
-          <p class="subtitle">Descrição breve</p>
+          <h1>SP2</h1>
+          <p class="subtitle">Descrição breve do projeto</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>Resumo executivo do projeto. Explique o objetivo, impacto e tecnologias envolvidas em 2 ou 3 parágrafos.</p>
+          <p>Continue com mais detalhes relevantes sobre escopo, desafios ou resultados obtidos.</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="" alt="Descrição da imagem 1">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/sp1.png" alt="Descrição da imagem 2">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+          <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/sp2.png" alt="Descrição da imagem 1">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/sp3.png" alt="Descrição da imagem 2">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/sp4.png" alt="Descrição da imagem 1">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+
+        <div class="project-footer">
+          <a href="img/fornecedor5.png" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
 
+      <!-- PROJETO 7 -->
       <div class="project-section" id="project7">
         <div class="project-hero">
-          <h1>Projeto 7</h1>
-          <p class="subtitle">Descrição breve</p>
+          <h1>Título do Projeto 7</h1>
+          <p class="subtitle">Descrição breve do projeto</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>Resumo executivo do projeto. Explique o objetivo, impacto e tecnologias envolvidas em 2 ou 3 parágrafos.</p>
+          <p>Continue com mais detalhes relevantes sobre escopo, desafios ou resultados obtidos.</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/projeto7_img1.png" alt="Descrição da imagem 1">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 1</h3>
+            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
+            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/projeto7_img2.png" alt="Descrição da imagem 2">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
 
+      <!-- PROJETO 8 -->
       <div class="project-section" id="project8">
         <div class="project-hero">
-          <h1>Projeto 8</h1>
-          <p class="subtitle">Descrição breve</p>
+          <h1>Título do Projeto 8</h1>
+          <p class="subtitle">Descrição breve do projeto</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>O Sentinel View foi desenvolvido para resolver um dos maiores gargalos operacionais da Central de Controle — a ausência de visibilidade e rastreabilidade sobre o status das câmeras Dahua DSS.
+          Antes do sistema, a identificação de câmeras offline dependia de verificação manual na árvore de dispositivos, um processo demorado, sujeito a falhas e que muitas vezes só era percebido após a ocorrência de eventos críticos</p>
+        </div>
+
+        <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/embreve.png" alt="em breve">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Em fase de Desenvolvimento</h3>
+            <p></p>
+           
+          </div>
+        </div>
+
+        <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame">
+              <img src="img/projeto8_img2.png" alt="Descrição da imagem 2">
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>Título da Seção 2</h3>
+            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
+            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
         </div>
       </div>
     </div>
