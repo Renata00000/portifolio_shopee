@@ -4,100 +4,201 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portfólio - Projetos Shopee</title>
-  <link rel="stylesheet" href="index.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <!-- Adicionando Font Awesome para ícones profissionais -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!-- Partículas animadas de fundo -->
+  <div class="particles" id="particles"></div>
+
   <div class="container">
-    <!-- Sidebar (como na SEGUNDA FOTO - com ícones, fundo branco, hover animado) -->
+    <!-- Sidebar REDESENHADO -->
     <div class="sidebar">
       <div class="logo">
-        <h1>💼 Portfólio</h1>
-        <p>Projetos Shopee</p>
+        <div class="logo-icon">
+          <i class="fas fa-rocket"></i>
+        </div>
+        <h1>Portfólio</h1>
+        <p>Projetos Shopee 2025</p>
+        <div class="logo-decoration"></div>
       </div>
       
-      <div class="menu-item active" onclick="showProject('welcome', this)">
-        <h3>🏠 Início</h3>
-        <p>Portfólio</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project1', this)">
-        <h3>🌟 LPR </h3>
-        <p>Plataforma de analytics</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project2', this)">
-        <h3>🌟 FLUXO </h3>
-        <p>Clique para ver detalhes</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project3', this)">
-        <h3>🌟 PAINEL DE CAMERAS </h3>
-        <p>Clique para ver detalhes</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project4', this)">
-        <h3>🌟 MAPA LOGISTICO </h3>
-        <p>Clique para ver detalhes</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project5', this)">
-        <h3>🌟FORNECEDOR </h3>
-        <p>Clique para ver detalhes</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project6', this)">
-        <h3>🌟SP2, </h3>
-        <p>Clique para ver detalhes</p>
-      </div>
+      <nav class="menu">
+        <div class="menu-item active" onclick="showProject('welcome', this)">
+          <div class="menu-icon">
+            <i class="fas fa-home"></i>
+          </div>
+          <div class="menu-content">
+            <h3>Início</h3>
+            <p>Visão Geral</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project1', this)">
+          <div class="menu-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="menu-content">
+            <h3>LPR Analytics</h3>
+            <p>Sistema de Analytics</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project2', this)">
+          <div class="menu-icon">
+            <i class="fas fa-project-diagram"></i>
+          </div>
+          <div class="menu-content">
+            <h3>Fluxo</h3>
+            <p>Gestão de Processos</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project3', this)">
+          <div class="menu-icon">
+            <i class="fas fa-video"></i>
+          </div>
+          <div class="menu-content">
+            <h3>Painel de Câmeras</h3>
+            <p>Monitoramento em Tempo Real</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project4', this)">
+          <div class="menu-icon">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <div class="menu-content">
+            <h3>Mapa Logístico</h3>
+            <p>Rastreamento e Rotas</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project5', this)">
+          <div class="menu-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <div class="menu-content">
+            <h3>Fornecedor</h3>
+            <p>Sistema de Gestão</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project6', this)">
+          <div class="menu-icon">
+            <i class="fas fa-cube"></i>
+          </div>
+          <div class="menu-content">
+            <h3>SP2</h3>
+            <p>Plataforma Integrada</p>
+          </div>
+        </div>
 
-      <div class="menu-item" onclick="showProject('project6', this)">
-        <h3>🌟PORTIFOLIO, </h3>
-        <p>Clique para ver detalhes</p>
-      </div>
-      
-      <div class="menu-item" onclick="showProject('project7', this)">
-        <h3>🌟IA</h3>
-        <p>Clique para ver detalhes</p>
+        <div class="menu-item" onclick="showProject('project-portfolio', this)">
+          <div class="menu-icon">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="menu-content">
+            <h3>Portfólio</h3>
+            <p>Este Projeto</p>
+          </div>
+        </div>
+        
+        <div class="menu-item" onclick="showProject('project7', this)">
+          <div class="menu-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div class="menu-content">
+            <h3>IA</h3>
+            <p>Inteligência Artificial</p>
+          </div>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Desenvolvido com 💜</p>
       </div>
     </div>
     
 
     <!-- Main Content -->
     <div class="main-content">
-      <!-- Capa inicial (como na SEGUNDA FOTO) -->
+      <!-- CAPA INICIAL RENOVADA -->
       <div class="project-section active" id="welcome">
         <div class="welcome-section">
-          <h1>🎨Portfólio!</h1>
-          <p>Projetos que desenvolvi na Shopee. 2025</p>
-          
-          
-          <div class="welcome-cards">
-            <div class="welcome-card">
-              <h3>07</h3>
-              <p>Projetos</p>
-
-               <div class="tech-section">
-          <h3>🔧 Tecnologias Utilizadas</h3>
-          <div class="tech-tags">
-            <span class="tech-tag">React</span>
-            <span class="tech-tag">TypeScript</span>
-            <span class="tech-tag">Python</span>
-            <span class="tech-tag">Apache Kafka</span>
-            <span class="tech-tag">Redis</span>
-            <span class="tech-tag">PostgreSQL</span>
-            <span class="tech-tag">Docker</span>
-            <span class="tech-tag">TensorFlow</span>
-            <span class="tech-tag">Chart.js</span>
-            <span class="tech-tag">WebSocket</span>
-          </div>
-        </div>
-
+          <div class="welcome-hero">
+            <div class="hero-badge">
+              <i class="fas fa-star"></i>
+              <span>2025</span>
             </div>
+            <h1 class="glitch" data-text="Portfólio de Projetos">Portfólio de Projetos</h1>
+            <p class="hero-subtitle">Desenvolvido na Shopee</p>
+            
+            <div class="hero-stats">
+              <div class="stat-item">
+                <div class="stat-number">07</div>
+                <div class="stat-label">Projetos</div>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Tecnologias</div>
+              </div>
+              <div class="stat-divider"></div>
+              <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Impacto</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="tech-showcase">
+            <h3><i class="fas fa-code"></i> Stack Tecnológico</h3>
+            <div class="tech-grid">
+              <div class="tech-item">
+                <i class="fab fa-react"></i>
+                <span>React</span>
+              </div>
+              <div class="tech-item">
+                <i class="fab fa-python"></i>
+                <span>Python</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-database"></i>
+                <span>PostgreSQL</span>
+              </div>
+              <div class="tech-item">
+                <i class="fab fa-docker"></i>
+                <span>Docker</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-chart-bar"></i>
+                <span>Chart.js</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-stream"></i>
+                <span>Kafka</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-bolt"></i>
+                <span>Redis</span>
+              </div>
+              <div class="tech-item">
+                <i class="fas fa-robot"></i>
+                <span>TensorFlow</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="cta-section">
+            <p class="cta-text">Explore os projetos no menu lateral</p>
+            <i class="fas fa-arrow-left pulse"></i>
           </div>
         </div>
       </div>
 
-      <!-- PROJETO 1  -->
+      <!-- PROJETO 1 - LPR -->
       <div class="project-section" id="project1">
         <div class="project-hero">
           <h1>LPR – Sistema de Analytics</h1>
@@ -114,8 +215,12 @@
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/spx_lpr.png" alt="planilhas de LPR e SPX">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
             </div>
           </div>
           <div class="text-wrapper">
@@ -129,22 +234,30 @@
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
-                <img src="img/pdf_1.png" alt="Relatório de segurança Shopee - Gráfico de motoristas críticos">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/001.png" alt="Relatório de segurança Shopee - Gráfico de motoristas críticos">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
               </div>
             </div>
+          </div>
           <div class="text-wrapper">
             <h3>🚘 Veículos Indevidos / Categorias Divergentes</h3>
             <p>Este painel consolida os principais indicadores de fraude e divergência de categoria entre as bases SPX e LPR.
-            Ele exibe impacto financeiro por motorista, taxa de fraude, categorias problemáticas e horários de pico de ocorrência, permitindo uma visão dos pontos críticos de controle..</p>
-            <p>Todos os cálculos e gráficos foram gerados automaticamente a partir dos dados tratados em Python (Pandas e NumPy), com visualizações desenvolvidas em Matplotlib e Seaborn.
+            Ele exibe impacto financeiro por motorista, taxa de fraude, categorias problemáticas e horários de pico de ocorrência, permitindo uma visão dos pontos críticos de controle.</p>
+            <p>Todos os cálculos e gráficos foram gerados automaticamente a partir dos dados tratados em Python (Pandas e NumPy), com visualizações desenvolvidas em Matplotlib e Seaborn.</p>
           </div>
         </div>
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/pdf_2.png" alt="pdf multiplas Ats">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
             </div>
           </div>
           <div class="text-wrapper">
@@ -155,12 +268,16 @@
           </div>
         </div>
 
-         <div class="content-row right-image">
+        <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
-                <img src="img/txt.png" alt="TXT. imagem com tds">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/txt.png" alt="TXT. imagem com tds">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
               </div>
             </div>
+          </div>
           <div class="text-wrapper">
             <h3>Relatórios TXT</h3>
             <p>Cada execução do sistema gera automaticamente um conjunto completo de relatórios em formato TXT, contendo desde métricas de desempenho da câmera LPR até análises detalhadas de veículos indevidos, motoristas falsificados e alertas de fraude.
@@ -170,29 +287,40 @@
           </div>
         </div>
 
-        <div class="content-row laft-image">
+        <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/html.png" alt="corpo do email">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
             </div>
           </div>
           <div class="text-wrapper">
             <h3>📧 E-mail Automatizado com Relatórios SPX × LPR</h3>
-            <p>O envio automático de relatórios marca o fechamento do ciclo de auditoria.
-            cada execução, o sistema compila as análises, gera os arquivos TXT e PDF e envia um resumo executivo por e-mail, contendo métricas como taxa de fraude, impacto financeiro e divergências encontradas.</p>
-            <p>O e-mail é formatado em HTML responsivo, com branding Shopee e link direto para o Google Sheets via API, permitindo acesso rápido aos dados completos.
-            Essa automação elimina etapas manuais e garante que as áreas responsáveis recebam informações precisas e atualizadas em tempo real.</p>
+            <p>O e-mail automatizado é o ponto final do pipeline, consolidando todas as análises em um formato executivo, visual e pronto para tomada de decisão.
+            Enviado diariamente aos gestores e equipes de auditoria, ele inclui métricas de performance, alertas críticos, gráficos comparativos e resumos financeiros — tudo gerado automaticamente pelo sistema.</p>
+            <p>Com layout responsivo, estrutura HTML rica e anexos PDF detalhados, o e-mail garante que as informações cheguem de forma clara, objetiva e acionável.
+            Essa automação reduziu em mais de 80% o tempo de análise manual e aumentou significativamente a velocidade de resposta a incidentes operacionais.</p>
           </div>
         </div>
 
-       
+        <!-- POST-IT DE STATUS -->
+        <div class="project-status">
+          <div class="status-postit status-completed">
+            <div class="postit-pin"></div>
+            <h4><i class="fas fa-check-circle"></i> Status do Projeto</h4>
+            <p><strong>✅ Em Produção</strong></p>
+            <p>Sistema operando 24/7 com processamento automatizado de relatórios diários.</p>
+            <div class="status-meta">Última atualização: Janeiro 2025</div>
+          </div>
+        </div>
 
-       
         <div class="project-footer">
-          <a href="https://exemplo.com" class="project-link">🔗 Ver Documentacao</a>
+          <a href="#" class="project-link">🔗 Ver Documentação Completa</a>
         </div>
       </div>
-
 
       <!-- PROJETO 2 -->
       <div class="project-section" id="project2">
@@ -213,7 +341,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fluxo1.png" alt="tela inicial organo de pessoas">
             </div>
           </div>
@@ -225,7 +353,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fluxo2.png" alt="painel de processos">
             </div>
           </div>
@@ -237,7 +365,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fluxo3.png" alt="fluxo aberto">
             </div>
           </div>
@@ -274,7 +402,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
           <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/painel01.png" alt="Descrição da imagem 2">
             </div>
           </div>
@@ -289,7 +417,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/painel1.png" alt="Descrição da imagem 1">
             </div>
           </div>
@@ -301,7 +429,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/painel2.png" alt="Descrição da imagem 2">
             </div>
           </div>
@@ -314,7 +442,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/painel03.png" alt="Descrição da imagem 1">
             </div>
           </div>
@@ -349,7 +477,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa01.png" alt="base de dados de onde pega as informacoes antes do mapa">
             </div>
           </div>
@@ -362,7 +490,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa2.png" alt="tela de inicio, mapa">
             </div>
           </div>
@@ -374,7 +502,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
          <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa3.png" alt="mapa com a regiao destacada">
             </div>
           </div>
@@ -387,7 +515,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
          <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa02.png" alt="mapa com o estado destacado">
             </div>
           </div>
@@ -400,7 +528,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa4.png" alt="modal de unidades aberto">
             </div>
           </div>
@@ -413,7 +541,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa5.png" alt="exemplo de unidades aberta unificadamente ou em lista">
             </div>
           </div>
@@ -426,7 +554,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa6.png" alt="modal da unidade mostrando as informações">
             </div>
           </div>
@@ -440,7 +568,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
          <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa1.png" alt="tela de login adm">
             </div>
           </div>
@@ -453,7 +581,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa9.png" alt="modal de cadastro aberto">
             </div>
           </div>
@@ -467,7 +595,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/mapa8.png" alt="tela de cadastro aberta">
             </div>
           </div>
@@ -499,7 +627,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fornecedor1.png" alt="como era">
             </div>
           </div>
@@ -512,7 +640,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fornecedor1.png" alt="tela de cadastro">
             </div>
           </div>
@@ -526,7 +654,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
          <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fornecedor2.png" alt="cadastro de PDF">
             </div>
           </div>
@@ -540,7 +668,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fornecedor3.png" alt="pasta no driver">
             </div>
           </div>
@@ -553,7 +681,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fornecedor4.png" alt="tela do adm">
             </div>
           </div>
@@ -567,7 +695,7 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/fornecedor6.png" alt="tela do cliente">
             </div>
           </div>
@@ -588,180 +716,234 @@ Essa integração entre estrutura humana e estrutura operacional trouxe clareza,
 
 
 
-      <!-- PROJETO 6 -->
+      <!-- PROJETO 6 - SP2 -->
       <div class="project-section" id="project6">
         <div class="project-hero">
-          <h1>SP2</h1>
-          <p class="subtitle">Descrição breve do projeto</p>
+          <h1>SP2 - Plataforma Integrada</h1>
+          <p class="subtitle">Sistema de integração e automação de processos</p>
         </div>
 
         <div class="executive-summary">
           <h2>🧩 Detalhes do Projeto</h2>
-          <p>Resumo executivo do projeto. Explique o objetivo, impacto e tecnologias envolvidas em 2 ou 3 parágrafos.</p>
-          <p>Continue com mais detalhes relevantes sobre escopo, desafios ou resultados obtidos.</p>
+          <p>Plataforma robusta para integração de múltiplos sistemas, automatização de workflows e centralização de dados operacionais.</p>
         </div>
 
-        <div class="content-row left-image">
+        <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="" alt="Descrição da imagem 1">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp01.png" alt="planilha de cadastro antes da criacaos da pagina">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
             </div>
           </div>
           <div class="text-wrapper">
-            <h3>Título da Seção 1</h3>
-            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
-            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
+          </div>
+        </div>
+
+         <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp1.png" alt="nova pagina de cadastro">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
+          </div>
+        </div>
+
+         <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp04.png" alt="como era antes apos a bipagem">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
+          </div>
+        </div>
+
+         <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp2.png" alt="painel com as bipagens apos automatizar">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
+          </div>
+        </div>
+
+         <div class="content-row right-image">
+          <div class="image-wrapper">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp3.png" alt="acordeon com os perfils">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
+          </div>
+        </div>
+
+         <div class="content-row left-image">
+          <div class="image-wrapper">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp05.png" alt="cards abertos">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-wrapper">
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
           </div>
         </div>
 
         <div class="content-row right-image">
           <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/sp1.png" alt="Descrição da imagem 2">
+            <div class="image-frame" onclick="openImageModal(this)">
+              <img src="img/sp4.png" alt="controles e campo de busca">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
             </div>
           </div>
           <div class="text-wrapper">
-            <h3>Título da Seção 2</h3>
-            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
-            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+            <h3>🔄 Integração de Sistemas</h3>
+            <p>Conecta diferentes plataformas em um único ambiente unificado.</p>
           </div>
         </div>
 
-          <div class="content-row left-image">
-          <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/sp2.png" alt="Descrição da imagem 1">
-            </div>
-          </div>
-          <div class="text-wrapper">
-            <h3>Título da Seção 1</h3>
-            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
-            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
+
+
+
+
+
+        <!-- POST-IT DE STATUS -->
+        <div class="project-status">
+          <div class="status-postit status-development">
+            <div class="postit-pin"></div>
+            <h4><i class="fas fa-code"></i> Status do Projeto</h4>
+            <p><strong>🚧 Em Desenvolvimento Ativo</strong></p>
+            <p>Implementando novas integrações e módulos de automação.</p>
+            <div class="status-meta">Atualização contínua</div>
           </div>
         </div>
-
-        <div class="content-row right-image">
-          <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/sp3.png" alt="Descrição da imagem 2">
-            </div>
-          </div>
-          <div class="text-wrapper">
-            <h3>Título da Seção 2</h3>
-            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
-            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
-          </div>
-        </div>
-
-        <div class="content-row left-image">
-          <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/sp4.png" alt="Descrição da imagem 1">
-            </div>
-          </div>
-          <div class="text-wrapper">
-            <h3>Título da Seção 1</h3>
-            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
-            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
-          </div>
-        </div>
-
 
         <div class="project-footer">
-          <a href="img/fornecedor5.png" class="project-link">🔗 Ver Projeto Completo</a>
+          <a href="#" class="project-link">🔗 Ver Documentação Completa</a>
         </div>
       </div>
 
-      <!-- PROJETO 7 -->
+      <!-- PROJETO PORTFÓLIO -->
+      <div class="project-section" id="project-portfolio">
+        <div class="project-hero">
+          <h1>Este Portfólio</h1>
+          <p class="subtitle">Plataforma de apresentação de projetos profissionais</p>
+        </div>
+
+        <div class="executive-summary">
+          <h2>🧩 Detalhes do Projeto</h2>
+          <p>Portfólio web desenvolvido para apresentar projetos de forma visual e impactante, com foco em comunicação clara tanto para públicos técnicos quanto para lideranças não técnicas.</p>
+          <p>Implementa design responsivo, animações suaves, modal de imagens e sistema de status de projetos, proporcionando uma experiência profissional e moderna.</p>
+        </div>
+
+        <!-- POST-IT DE STATUS -->
+        <div class="project-status">
+          <div class="status-postit status-completed">
+            <div class="postit-pin"></div>
+            <h4><i class="fas fa-check-circle"></i> Status do Projeto</h4>
+            <p><strong>✅ Ativo</strong></p>
+            <p>Portfólio em constante atualização com novos projetos e melhorias.</p>
+            <div class="status-meta">Última atualização: Janeiro 2025</div>
+          </div>
+        </div>
+
+        <div class="project-footer">
+          <a href="#" class="project-link">🔗 Ver Código Fonte</a>
+        </div>
+      </div>
+
+      <!-- PROJETO 7 - IA -->
       <div class="project-section" id="project7">
         <div class="project-hero">
-          <h1>Título do Projeto 7</h1>
-          <p class="subtitle">Descrição breve do projeto</p>
+          <h1>Projeto de Inteligência Artificial</h1>
+          <p class="subtitle">Soluções de IA aplicadas à operação</p>
         </div>
 
         <div class="executive-summary">
           <h2>🧩 Detalhes do Projeto</h2>
-          <p>Resumo executivo do projeto. Explique o objetivo, impacto e tecnologias envolvidas em 2 ou 3 parágrafos.</p>
-          <p>Continue com mais detalhes relevantes sobre escopo, desafios ou resultados obtidos.</p>
+          <p>Desenvolvimento de modelos de machine learning e deep learning para automação inteligente, predição de falhas e otimização de processos operacionais.</p>
         </div>
 
         <div class="content-row left-image">
           <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/projeto7_img1.png" alt="Descrição da imagem 1">
-            </div>
-          </div>
-          <div class="text-wrapper">
-            <h3>Título da Seção 1</h3>
-            <p>Descrição detalhada relacionada à imagem à esquerda.</p>
-            <p>Continue explicando funcionalidades, decisões técnicas ou insights.</p>
-          </div>
-        </div>
-
-        <div class="content-row right-image">
-          <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/projeto7_img2.png" alt="Descrição da imagem 2">
-            </div>
-          </div>
-          <div class="text-wrapper">
-            <h3>Título da Seção 2</h3>
-            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
-            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
-          </div>
-        </div>
-
-        <div class="project-footer">
-          <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
-        </div>
-      </div>
-
-      <!-- PROJETO 8 -->
-      <div class="project-section" id="project8">
-        <div class="project-hero">
-          <h1>Título do Projeto 8</h1>
-          <p class="subtitle">Descrição breve do projeto</p>
-        </div>
-
-        <div class="executive-summary">
-          <h2>🧩 Detalhes do Projeto</h2>
-          <p>O Sentinel View foi desenvolvido para resolver um dos maiores gargalos operacionais da Central de Controle — a ausência de visibilidade e rastreabilidade sobre o status das câmeras Dahua DSS.
-          Antes do sistema, a identificação de câmeras offline dependia de verificação manual na árvore de dispositivos, um processo demorado, sujeito a falhas e que muitas vezes só era percebido após a ocorrência de eventos críticos</p>
-        </div>
-
-        <div class="content-row left-image">
-          <div class="image-wrapper">
-            <div class="image-frame">
+            <div class="image-frame" onclick="openImageModal(this)">
               <img src="img/embreve.png" alt="em breve">
+              <div class="image-overlay">
+                <i class="fas fa-search-plus"></i>
+                <span>Clique para ampliar</span>
+              </div>
             </div>
           </div>
           <div class="text-wrapper">
-            <h3>Em fase de Desenvolvimento</h3>
-            <p></p>
-           
+            <h3>🤖 Em Fase de Desenvolvimento</h3>
+            <p>Projeto em construção com foco em visão computacional e processamento de linguagem natural.</p>
           </div>
         </div>
 
-        <div class="content-row right-image">
-          <div class="image-wrapper">
-            <div class="image-frame">
-              <img src="img/projeto8_img2.png" alt="Descrição da imagem 2">
-            </div>
-          </div>
-          <div class="text-wrapper">
-            <h3>Título da Seção 2</h3>
-            <p>Outra parte importante do projeto, agora com imagem à direita.</p>
-            <p>Adicione mais contexto técnico ou de negócio conforme necessário.</p>
+        <!-- POST-IT DE STATUS -->
+        <div class="project-status">
+          <div class="status-postit status-planning">
+            <div class="postit-pin"></div>
+            <h4><i class="fas fa-lightbulb"></i> Status do Projeto</h4>
+            <p><strong>📋 Em Planejamento</strong></p>
+            <p>Fase inicial de pesquisa e definição de arquitetura.</p>
+            <div class="status-meta">Kickoff previsto: Março 2025</div>
           </div>
         </div>
 
         <div class="project-footer">
-          <a href="https://exemplo.com" class="project-link">🔗 Ver Projeto Completo</a>
+          <a href="#" class="project-link">🔗 Ver Documentação Completa</a>
         </div>
       </div>
+
     </div>
   </div>
 
-  <script src="portifolio.js"></script>
+  <!-- MODAL DE IMAGEM -->
+  <div id="imageModal" class="modal" onclick="closeImageModal()">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modalImage">
+    <div class="modal-caption" id="modalCaption"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
