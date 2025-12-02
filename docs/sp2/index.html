@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Entrada | Documentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF8C00 0%, #FF7F50 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #FF8C00;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #FF8C00, #FF7F50);
+            border-radius: 3px;
+        }
+        
+        .subsection {
+            margin: 40px 0;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #FF8C00;
+        }
+        
+        .text-block {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        .text-block strong {
+            color: #2d3748;
+            font-weight: 700;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF5E6 0%, #FFE5CC 100%);
+            border-left: 6px solid #FF8C00;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(255, 140, 0, 0.15);
+        }
+        
+        .highlight-box h4 {
+            color: #C44500;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box p {
+            color: #8B5E3C;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+        
+        .custom-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            font-size: 16px;
+            color: #4a5568;
+        }
+        
+        .custom-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #FF8C00;
+            font-weight: 900;
+            font-size: 20px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #FF8C00;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        
+        .feature-description {
+            font-size: 15px;
+            color: #718096;
+            line-height: 1.6;
+        }
+        
+        .tech-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tech-table thead {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+        }
+        
+        .tech-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .tech-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        
+        .tech-table tbody tr {
+            background: white;
+            transition: all 0.2s ease;
+        }
+        
+        .tech-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .tech-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .comparison-card {
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+        }
+        
+        .comparison-card.before {
+            background: linear-gradient(135deg, #FEE2E2 0%, #FECACA 100%);
+            border-color: #DC2626;
+        }
+        
+        .comparison-card.after {
+            background: linear-gradient(135deg, #D1FAE5 0%, #A7F3D0 100%);
+            border-color: #10B981;
+        }
+        
+        .comparison-title {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .comparison-card.before .comparison-title {
+            color: #7F1D1D;
+        }
+        
+        .comparison-card.after .comparison-title {
+            color: #065F46;
+        }
+        
+        .comparison-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .comparison-list li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            font-size: 14px;
+            color: #4a5568;
+        }
+        
+        .comparison-card.before .comparison-list li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #DC2626;
+            font-weight: 700;
+        }
+        
+        .comparison-card.after .comparison-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10B981;
+            font-weight: 700;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #a0aec0;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #FF8C00;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+            
+            .header, .content {
+                padding: 40px 30px;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="badge">🔐 SHOPEE SECURITY · CONTROLE DE ACESSO</div>
+                <h1>Sistema de Controle de Entrada</h1>
+                <p class="subtitle">Plataforma Visual e Inteligente para Gestão Completa de Pessoas e Equipamentos</p>
+                
+                <div class="stats-row">
+                    
+                    <div class="stat-box">
+                        <div class="stat-value">3</div>
+                        <div class="stat-label">Módulos Integrados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">Real-Time</div>
+                        <div class="stat-label">Bipagem em Tempo Real</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">Câmera</div>
+                        <div class="stat-label">Captura Integrada</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">📋 Visão Geral do Projeto</h2>
+                
+                <div class="text-block">
+                    O <strong>Sistema de Controle de Entrada de Pessoas e Equipamentos</strong> foi desenvolvido para suprir uma necessidade crítica das unidades da Shopee: <strong>registrar, organizar e rastrear</strong> as entradas de colaboradores permanentes, temporários e terceiros, junto aos seus equipamentos pessoais e corporativos.
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>⚠️ O Problema Original</h4>
+                    <p>
+                        Antes desse projeto, todo o processo era <strong>manual e extremamente limitado</strong>. O cadastro era feito em uma planilha simples, com poucos campos, sem padronização, sem rastreabilidade e sem campos obrigatórios. Na hora da bipagem nos portais de acesso, o sistema retornava apenas <strong>três informações básicas</strong> — nome, modelo e status — o que dificultava a análise, o controle e a auditoria dos dados de entrada.
+                    </p>
+                </div>
+                
+                <div class="text-block">
+                    Diante desse cenário, foi criado um <strong>sistema completo, visual e inteligente</strong> utilizando Google Apps Script, Google Sheets, HTML/CSS/JavaScript, capaz de registrar cada pessoa, seus equipamentos, gerar cards completos na bipagem e armazenar todo o histórico em uma interface organizada e filtrável.
+                </div>
+                
+                <div class="text-block">
+                    O projeto evoluiu de uma simples ferramenta de planilha para um <strong>sistema robusto, visual, seguro e escalável</strong> — hoje utilizado operacionalmente pelas unidades.
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">🏗️ Arquitetura do Sistema</h2>
+                
+                <div class="text-block">
+                    O sistema é composto por <strong>3 módulos principais integrados</strong>, cada um com responsabilidades específicas mas conectados em um fluxo unificado:
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-title">Módulo 1: Cadastro</div>
+                        <div class="feature-description">
+                            Interface de registro completo com captura de foto via câmera, campos estruturados para dados pessoais e equipamentos, validação inteligente e integração direta com Google Sheets.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎫</div>
+                        <div class="feature-title">Módulo 2: Bipagem</div>
+                        <div class="feature-description">
+                            Sistema de leitura em tempo real que busca dados por IMEI e retorna card visual completo com foto, status, equipamentos e alertas de divergências ou itens não declarados.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📁</div>
+                        <div class="feature-title">Módulo 3: Histórico</div>
+                        <div class="feature-description">
+                            Interface navegável organizada em acordeão por mês/dia, com cards flip interativos, busca global, filtros e contadores visuais de status (aprovado/negado/não encontrado).
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Backend - Google Apps Script</h3>
+                    <div class="text-block">
+                        O backend é construído em <strong>Google Apps Script</strong>, servindo como camada de lógica entre as interfaces HTML e o Google Sheets. A função doGet() gerencia o roteamento entre páginas (cadastro, bipagem, histórico), enquanto a função cadastrar() valida e insere dados com timestamps automáticos. Para a bipagem em tempo real, buscarPorIMEI() localiza registros instantaneamente, e obterDadosHistorico() organiza tudo em estrutura hierárquica (mês > dia > registros). Funções especializadas de formatação garantem conversão correta de datas entre UTC e horário local, com validação diferenciada para permanentes e temporários.
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">⚙️ Funcionalidades Principais</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📸</div>
+                        <div class="feature-title">Foto pela Câmera</div>
+                        <div class="feature-description">
+                            Captura integrada com preview, retake e compressão automática (300x300px, 70% qualidade).
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">👤</div>
+                        <div class="feature-title">Dados Pessoais</div>
+                        <div class="feature-description">
+                            Nome, status (permanente/temporário), função, período de validade, timestamp automático.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-title">Equipamentos Pessoais</div>
+                        <div class="feature-description">
+                            Celular (modelo + IMEI), carregador, campos extras customizáveis.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <div class="feature-title">Equipamentos Corporativos</div>
+                        <div class="feature-description">
+                            Celular, notebook (serial number), mouse, fone, carregadores.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <div class="feature-title">Validação Inteligente</div>
+                        <div class="feature-description">
+                            Campos obrigatórios diferenciados, feedback visual instantâneo com bordas vermelhas.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎫</div>
+                        <div class="feature-title">Bipagem Tempo Real</div>
+                        <div class="feature-description">
+                            Busca por IMEI retorna card completo com foto, status e equipamentos listados.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🟢</div>
+                        <div class="feature-title">Status Colorido</div>
+                        <div class="feature-description">
+                            Verde (aprovado), amarelo (divergências), vermelho (não encontrado).
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🚨</div>
+                        <div class="feature-title">Alertas de Divergências</div>
+                        <div class="feature-description">
+                            Detecta itens presentes mas não declarados, exibe alertas visuais.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📁</div>
+                        <div class="feature-title">Histórico em Acordeão</div>
+                        <div class="feature-description">
+                            Organizado por mês > dia > cards, expandível com contadores automáticos.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🃏</div>
+                        <div class="feature-title">Cards Flip 3D</div>
+                        <div class="feature-description">
+                            Frente: foto/nome/status. Verso: equipamentos/datas/alertas.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-title">Busca Global</div>
+                        <div class="feature-description">
+                            Filtro por nome, função ou data com debouncing (300ms) otimizado.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Contadores Automáticos</div>
+                        <div class="feature-description">
+                            Ícones coloridos com contagem de aprovados/negados/não encontrados.
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">💻 Stack Tecnológico</h2>
+                
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Camada</th>
+                            <th>Tecnologia</th>
+                            <th>Versão/Detalhes</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Backend</strong></td>
+                            <td>Google Apps Script</td>
+                            <td>ES6+</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Database</strong></td>
+                            <td>Google Sheets</td>
+                            <td>API v4</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Frontend</strong></td>
+                            <td>HTML5 + CSS3 + JavaScript Vanilla</td>
+                            <td>ES6+ / CSS Grid & Flexbox</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fontes</strong></td>
+                            <td>Google Fonts (Quicksand, Poppins, Roboto)</td>
+                            <td>Weights: 400-900</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ícones</strong></td>
+                            <td>Font Awesome</td>
+                            <td>6.0.0-beta3</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Câmera</strong></td>
+                            <td>MediaDevices API (getUserMedia)</td>
+                            <td>HTML5 Native</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Compressão de Imagem</strong></td>
+                            <td>Canvas API + Blob</td>
+                            <td>JPEG 70% quality, 300x300px</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Animações</strong></td>
+                            <td>CSS3 Transitions & Keyframes</td>
+                            <td>Transform 3D (flip cards)</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hospedagem</strong></td>
+                            <td>Google Apps Script Web App</td>
+                            <td>Deploy as Web App</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">⚡ Desafios Técnicos & Soluções Implementadas</h2>
+                
+                <div class="text-block">
+                    A construção deste sistema envolveu <strong>superar diversos obstáculos técnicos</strong> que exigiram soluções criativas e otimizações específicas.
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">1. Captura e Compressão de Imagens</h3>
+                    <div class="text-block">
+                        <strong>Problema:</strong> Fotos capturadas pela câmera geravam arquivos muito grandes (1-3MB+), causando lentidão no salvamento no Google Sheets e excedendo limites de células.
+                    </div>
+                    <div class="text-block">
+                        <strong>Solução:</strong> Implementei sistema de compressão automática usando Canvas API + Blob, redimensionando para 300x300px e aplicando qualidade JPEG de 70%, reduzindo tamanho para ~20-50KB sem perda significativa de qualidade visual.
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">2. Validação Condicional de Campos</h3>
+                    <div class="text-block">
+                        <strong>Problema:</strong> Colaboradores permanentes e temporários têm requisitos diferentes — temporários precisam de data de entrada/saída obrigatórias, permanentes não.
+                    </div>
+                    <div class="text-block">
+                        <strong>Solução:</strong> Criei lógica de validação dinâmica no frontend (JavaScript) e backend (Apps Script) que verifica o status selecionado e ajusta os campos obrigatórios em tempo real, exibindo/ocultando campos conforme necessário.
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">3. Organização Hierárquica do Histórico</h3>
+                    <div class="text-block">
+                        <strong>Problema:</strong> Exibir centenas de registros de forma navegável, sem sobrecarregar a interface e mantendo performance.
+                    </div>
+                    <div class="text-block">
+                        <strong>Solução:</strong> Desenvolvi estrutura de acordeão multinível (mês > dia > cards) com lazy rendering — apenas os itens visíveis são renderizados inicialmente, expandindo sob demanda. Uso de CSS transform para animações de flip sem reflow do DOM.
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">4. Performance na Busca e Filtros</h3>
+                    <div class="text-block">
+                        <strong>Problema:</strong> Busca em tempo real sobre centenas de cards causava lag visível na interface.
+                    </div>
+                    <div class="text-block">
+                        <strong>Solução:</strong> Implementei debouncing na busca (delay de 300ms após última digitação) e uso de classList.toggle ao invés de manipulação direta de display, aproveitando otimizações do navegador.
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">5. Formatação de Datas entre Timezones</h3>
+                    <div class="text-block">
+                        <strong>Problema:</strong> Google Sheets armazena datas em UTC, mas precisava exibir no horário local de Brasília (UTC-3) sem inconsistências.
+                    </div>
+                    <div class="text-block">
+                        <strong>Solução:</strong> Criei três funções especializadas de formatação: formatarDataISO() para armazenamento, formatarDataHoraLocal() para exibição e formatarDataSemHora() para comparações, garantindo consistência em toda a aplicação.
+                    </div>
+                </div>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">6. Gerenciamento de Estado da Câmera</h3>
+                    <div class="text-block">
+                        <strong>Problema:</strong> Câmera ficava ativa em background consumindo recursos, e usuários não conseguiam tirar nova foto após captura.
+                    </div>
+                    <div class="text-block">
+                        <strong>Solução:</strong> Implementei controle completo do ciclo de vida da câmera com stream.getTracks().forEach(track => track.stop()), estados visuais claros (capturar/preview/retake) e limpeza automática do stream ao fechar a interface.
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">🎯 Impacto e Benefícios Operacionais</h2>
+                
+                <div class="highlight-box">
+                    <h4>✅ Transformação Operacional</h4>
+                    <p>
+                        <strong>Antes:</strong> Cadastro manual em planilha simples sem validação, bipagem retornando apenas 3 campos, sem rastreabilidade histórica, auditorias impossíveis.<br><br>
+                        <strong>Depois:</strong> Sistema visual completo com captura de foto, validações inteligentes, cards interativos na bipagem, histórico organizado navegável e auditável, filtros e busca global — tudo em tempo real.
+                    </p>
+                </div>
+                
+                
+           
+            </section>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-title">SHOPEE LOGISTICS · SECURITY</div>
+            <p>Sistema de Controle de Entrada de Pessoas e Equipamentos</p>
+            <p>Desenvolvido por Renata C. | Analista de Segurança & Desenvolvimento</p>
+            <p style="margin-top: 20px; font-size: 13px; opacity: 0.8;">
+                © 2025 Shopee Brasil – Documentação Técnica Proprietária
+            </p>
+        </div>
+    </div>
+</body>
+</html>

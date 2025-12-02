@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Logístico SPX Brasil | Documentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #d85a15 0%, #352005 100%);
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #ea580c 0%, #a15813 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #ea580c;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #ea580c, #dc2626);
+            border-radius: 3px;
+        }
+        
+        .subsection {
+            margin: 40px 0;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #ea580c;
+        }
+        
+        .text-block {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        .text-block strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 5px solid #ea580c;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #b45309;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .highlight-box p {
+            color: #78350f;
+            line-height: 1.7;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .alert-box h4 {
+            color: #991b1b;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .alert-box p {
+            color: #7f1d1d;
+            line-height: 1.7;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .component-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .component-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #ea580c;
+        }
+
+        .component-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .component-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .component-description {
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .component-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .component-features li {
+            padding: 6px 0;
+            color: #718096;
+            font-size: 14px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .component-features li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #ea580c;
+            font-weight: 700;
+        }
+        
+        .tech-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tech-table thead {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+        }
+        
+        .tech-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .tech-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        
+        .tech-table tbody tr {
+            background: white;
+            transition: all 0.2s ease;
+        }
+        
+        .tech-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .tech-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .comparison-before {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+        }
+
+        .comparison-after {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 5px solid #10b981;
+        }
+
+        .comparison-card h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .comparison-before h4 {
+            color: #991b1b;
+        }
+
+        .comparison-after h4 {
+            color: #065f46;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .comparison-before li {
+            color: #7f1d1d;
+        }
+
+        .comparison-after li {
+            color: #065f46;
+        }
+
+        .comparison-before li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .comparison-after li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #a0aec0;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #ea580c;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+            
+            .header, .content {
+                padding: 40px 30px;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .comparison-grid, .component-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="badge">✈️ SHOPEE LOGISTICS · CENTRALIZAÇÃO NACIONAL</div>
+                <h1>Locations - Security SPX Brasil</h1>
+                <p class="subtitle">Plataforma Visual Interativa para Centralização e Gestão de Unidades Logísticas Nacionais por Macro-Regionais</p>
+                
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-value">24</div>
+                        <div class="stat-label">Estados Mapeados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">5</div>
+                        <div class="stat-label">Macro-Regionais Shopee</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">60+</div>
+                        <div class="stat-label">Sub-Regionais com Analistas</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">300+</div>
+                        <div class="stat-label">Unidades Cadastradas</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">📋 Visão Geral do Projeto</h2>
+                
+                <div class="text-block">
+                    O <strong>Mapa</strong> foi desenvolvido para <strong>centralizar e unificar</strong> as informações de todas as unidades logísticas da Shopee no território nacional, organizadas por <strong>5 macro-regionais operacionais</strong> com analistas responsáveis identificados, substituindo o antigo modelo descentralizado baseado em <strong>planilhas isoladas e links fragmentados</strong>.
+                </div>
+                
+                <div class="alert-box">
+                    <h4>⚠️ O Problema Original</h4>
+                    <p>
+                        A consulta de dados era <strong>demorada, fragmentada e sujeita a inconsistências</strong>. Cada informação (endereço, responsável, contatos, categorias de unidades) estava distribuída em <strong>planilhas diferentes</strong>, sem um padrão único de estrutura ou atualização.
+                    </p>
+                    <p style="margin-top: 12px;">
+                        Equipes de segurança, operações e gestão perdiam tempo navegando entre múltiplas fontes desatualizadas <strong>sem saber quem era o analista responsável por cada regional</strong>, gerando <strong>retrabalho, falhas na comunicação e problemas na tomada de decisão</strong>.
+                    </p>
+                </div>
+                
+                <div class="text-block">
+                    O sistema foi projetado para <strong>mapear visualmente todas as unidades logísticas</strong> em um painel interativo e dinâmico, <strong>dividido por macro-regionais da Shopee</strong> (Norte/Nordeste, Centro-Oeste/MG, RJ/ES, Sul e São Paulo), com <strong>identificação clara de gerentes e analistas responsáveis por cada sub-regional</strong>, possibilitando <strong>pesquisa, navegação hierárquica, filtros por regional e atualização centralizada de dados em tempo real</strong>.
+                </div>
+                
+                <div class="text-block">
+                    A aplicação oferece uma <strong>experiência visual intuitiva com sistema de cores por regional</strong>: o usuário clica em um estado do mapa do Brasil (colorido conforme sua macro-regional), visualiza todas as cidades organizadas por sub-regionais com nome do analista responsável, filtra por categoria (Hub, SOC, Big Hub, Fulfillment) e visualiza ficha técnica completa de cada unidade — tudo em segundos, com <strong>rastreabilidade total de responsáveis</strong>.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🗺️ Arquitetura de Macro-Regionais Shopee</h2>
+                
+                <div class="text-block">
+                    O Brasil foi dividido estrategicamente em <strong>5 macro-regionais operacionais</strong>, cada uma com cor distinta no mapa, gerente responsável e múltiplas sub-regionais com analistas específicos. Esta organização permite <strong>gestão descentralizada eficiente</strong> e <strong>comunicação direta com responsáveis locais</strong>.
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🟢 Norte/Nordeste - Gerente: Adolfo</h3>
+                    <div class="text-block">
+                        <strong>16 Estados:</strong> RO, AC, AM, RR, PA, AP, TO, MA, PI, CE, RN, PB, PE, AL, SE, BA<br>
+                        <strong>Cor no Mapa:</strong> Verde (#75db7e)<br>
+                        <strong>Sub-Regionais:</strong> BA (4 regionais), PE (3 regionais), demais estados (1 regional cada)<br>
+                        <strong>Analistas Principais:</strong> Alexandre Pinheiro (CE), Ricardo Alexandre (PB/RN), Andre Carlos (PE/AL), Denysson Garcêz (MA/PI)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🟠 Centro-Oeste/Minas Gerais - Gerente: Pamplona</h3>
+                    <div class="text-block">
+                        <strong>5 Estados:</strong> MT, MS, GO, DF, MG<br>
+                        <strong>Cor no Mapa:</strong> Laranja (#e6a65d)<br>
+                        <strong>Sub-Regionais:</strong> MG (4 regionais), demais estados (1 regional cada)<br>
+                        <strong>Analistas Principais:</strong> Julio Neto (GO/AM), Flavio Fernandes (DF/MG 01), Marcos Vinicius (MG 02), Paulo Silvério (MG 03)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🔴 Rio de Janeiro/Espírito Santo - Gerente: Guaracy</h3>
+                    <div class="text-block">
+                        <strong>2 Estados:</strong> RJ, ES<br>
+                        <strong>Cor no Mapa:</strong> Vermelho (#db7575)<br>
+                        <strong>Sub-Regionais:</strong> RJ (2 regionais), ES (1 regional)<br>
+                        <strong>Analistas:</strong> Geovane Oliveira (RJ 01 - 18 cidades), Bruno Garcia (RJ 02), Eden Souza (ES - 9 cidades)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🟣 Sul - Gerente: Guaracy</h3>
+                    <div class="text-block">
+                        <strong>3 Estados:</strong> PR, SC, RS<br>
+                        <strong>Cor no Mapa:</strong> Roxo (#b875db)<br>
+                        <strong>Sub-Regionais:</strong> PR (2 regionais), RS (2 regionais), SC (1 regional)<br>
+                        <strong>Analistas:</strong> Ivan Matos (PR 01), Rafael Andreta (PR 02), Marcio Vargas (SC), Ederson Abreu (RS 01), Daniela Souza (RS 02)
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">🔵 São Paulo - Gerentes: SPM (Gustavo) / SPI (Guaracy)</h3>
+                    <div class="text-block">
+                        <strong>Estado Único com Estrutura Especial</strong><br>
+                        <strong>Cor no Mapa:</strong> Azul (#829fee)<br>
+                        <strong>Divisão:</strong> Interior (SPI 1-6) + Metropolitana (SPM 1-7)<br>
+                        <strong>Analistas SPI:</strong> Thiago Mina (SPI 1, 4), Ana Priscila (SPI 2, 3, 5), Vitor Vieira (SPI 6)<br>
+                        <strong>Analistas SPM:</strong> Giorgio Franchi (SPM 1-7), Vitor Vieira (SPM 2), Enio Carlos/Reynaldo (SPM 4), Alessandra/Samuel (SPM 5), Acilene/Paulo (SPM 6)
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>💡 Decisão Estratégica: Por que Regionais?</h4>
+                    <p>
+                        A divisão por <strong>macro-regionais e sub-regionais com analistas responsáveis</strong> permite:
+                    </p>
+                    <ul style="margin-top: 12px; margin-left: 20px;">
+                        <li>✅ <strong>Descentralização da gestão</strong> - Cada área tem responsável local</li>
+                        <li>✅ <strong>Comunicação direta</strong> - Facilita contato com quem conhece a operação</li>
+                        <li>✅ <strong>Escalabilidade</strong> - Estados grandes divididos em sub-regionais gerenciáveis</li>
+                        <li>✅ <strong>Rastreabilidade</strong> - Sempre se sabe quem é responsável por cada unidade</li>
+                        <li>✅ <strong>Organização visual</strong> - Cores facilitam identificação rápida no mapa</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🗺️ Componentes Principais</h2>
+                
+                <div class="text-block">
+                    O sistema é composto por quatro módulos integrados, cada um responsável por uma camada específica da operação.
+                </div>
+
+                <div class="component-grid">
+                    <div class="component-card">
+                        <div class="component-icon">🗺️</div>
+                        <div class="component-title">MapaBrasil.jsx</div>
+                        <div class="component-description">
+                            Mapa interativo SVG com estados coloridos por macro-regional, sistema de hover que destaca toda a regional e detecção de cliques para navegação dinâmica.
+                        </div>
+                        <ul class="component-features">
+                            <li>5 cores distintas por macro-regional</li>
+                            <li>Hover destaca todos estados da mesma regional</li>
+                            <li>Estado clicado fica dourado com zoom sutil</li>
+                            <li>Legenda compacta e responsiva com gerentes</li>
+                            <li>Eventos de clique por estado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-icon">🏙️</div>
+                        <div class="component-title">OpLogistica.jsx</div>
+                        <div class="component-description">
+                            Controla navegação hierárquica (Estado → Sub-Regional → Cidade → Unidade) com modal dinâmico, dropdown de regionais e sistema de filtros avançados.
+                        </div>
+                        <ul class="component-features">
+                            <li>Dropdown filtra cidades por sub-regional</li>
+                            <li>Nome do analista responsável visível</li>
+                            <li>Tabs especiais para SP (Interior/Metropolitana)</li>
+                            <li>Filtros por Hubs, SOCs, Big Hubs, Fulfillments</li>
+                            <li>Busca global em tempo real</li>
+                            <li>Ficha técnica completa da unidade</li>
+                            <li>Totalizadores gerais e por estado</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="component-card">
+                        <div class="component-icon">🔐</div>
+                        <div class="component-title">AdminPanel.jsx</div>
+                        <div class="component-description">
+                            Camada administrativa com controle de acesso e CRUD completo para gerenciamento centralizado das unidades.
+                        </div>
+                        <ul class="component-features">
+                            <li>Autenticação segura via senha</li>
+                            <li>CRUD completo de unidades</li>
+                            <li>Formulário multi-abas organizado</li>
+                            <li>Gestão de status operacional</li>
+                            <li>Controle de datas (abertura/fechamento)</li>
+                            <li>Tabela administrativa com filtros</li>
+                        </ul>
+                    </div>
+
+                    <div class="component-card">
+                        <div class="component-icon">📊</div>
+                        <div class="component-title">regionaisData.jsx</div>
+                        <div class="component-description">
+                            Arquivo de dados estruturados contendo mapeamento completo de 24 estados, 60+ sub-regionais e analistas responsáveis.
+                        </div>
+                        <ul class="component-features">
+                            <li>Estrutura hierárquica de regionais</li>
+                            <li>Mapeamento cidade → analista responsável</li>
+                            <li>Suporte para múltiplos analistas por regional</li>
+                            <li>Configuração centralizada e manutenível</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎯 Funcionalidades Principais</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Navegação Hierárquica Inteligente</h3>
+                    <div class="text-block">
+                        O sistema implementa controle de estado em cascata permitindo navegação fluida entre níveis (Estado → Cidade → Unidade) sem perda de contexto, com botões de "Voltar" que resetam apenas o nível necessário.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Busca Global e Contextual</h3>
+                    <div class="text-block">
+                        Algoritmo de busca recursiva multinível que percorre estrutura JSON aninhada (estado → cidade → tipo → unidade), capturando contexto completo e retornando resultados enrichados para navegação direta.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Filtros Dinâmicos</h3>
+                    <div class="text-block">
+                        Filtros client-side com estado local aplicando .filter() em dados já carregados, com indicadores visuais de filtro ativo e botão de limpar. Permite filtrar por categoria, status, estado e cidade simultaneamente.
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Painel Administrativo Completo</h3>
+                    <div class="text-block">
+                        Formulário multi-abas (Localização, Responsáveis, Contatos, Operação) com estado centralizado que persiste durante toda a sessão de edição. Todos os campos controlados por handleInputChange único, garantindo consistência de dados.
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">⚡ Desafios Técnicos Resolvidos</h2>
+                
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 35%;">Desafio</th>
+                            <th>Solução Aplicada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Navegação hierárquica complexa</strong></td>
+                            <td>Controle de estado em cascata usando useState para selectedState, selectedCity e selectedUnit, mantendo contexto superior ao retornar níveis.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sincronização Mapa ↔ Modal</strong></td>
+                            <td>Dicionário de mapeamento bidirecional (nomeParaSigla) convertendo automaticamente "São Paulo" → "SP" e vice-versa.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Busca em estrutura aninhada</strong></td>
+                            <td>Algoritmo de busca recursiva multinível percorrendo todos os níveis e capturando contexto completo (estado, cidade, tipo).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Filtros dinâmicos por categoria</strong></td>
+                            <td>Filtros client-side com estado local (filterType) aplicando .filter() em dados carregados, com indicadores visuais.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Formulários multi-abas</strong></td>
+                            <td>Estado centralizado (formData) persistindo durante toda sessão, com currentTab controlando apenas visualização.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">📊 Antes vs Depois</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card comparison-before">
+                        <h4>✗ Modelo Descentralizado Anterior</h4>
+                        <ul>
+                            <li>Dezenas de planilhas fragmentadas</li>
+                            <li>Dados desatualizados e inconsistentes</li>
+                            <li>Tempo de busca: minutos</li>
+                            <li>Zero padronização</li>
+                            <li>Sem histórico de alterações</li>
+                            <li>Dificuldade em treinamentos</li>
+                            <li>Retrabalho constante</li>
+                            <li>Falhas na tomada de decisão</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card comparison-after">
+                        <h4>✓ Sistema Centralizado Atual</h4>
+                        <ul>
+                            <li>Base única e consolidada</li>
+                            <li>Dados sempre atualizados</li>
+                            <li>Tempo de busca: segundos</li>
+                            <li>Padronização total</li>
+                            <li>Rastreabilidade completa</li>
+                            <li>Facilidade em treinamentos</li>
+                            <li>Zero retrabalho</li>
+                            <li>Decisões baseadas em dados confiáveis</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎯 Impacto e Benefícios Operacionais</h2>
+                
+                <div class="highlight-box">
+                    <h4>✅ Transformação Operacional</h4>
+                    <p>
+                        <strong>Antes:</strong> Equipes gastavam minutos navegando entre dezenas de planilhas desatualizadas para encontrar informações básicas.<br><br>
+                        <strong>Depois:</strong> Consulta realizada em <strong>segundos</strong>, com visualização hierárquica intuitiva, busca global e dados sempre atualizados.
+                    </p>
+                </div>
+                
+                <div class="text-block" style="margin-top: 30px;">
+                    <strong>📊 Ganhos Mensuráveis:</strong>
+                </div>
+                
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Eliminação de dezenas de planilhas descentralizadas</strong> – fonte única da verdade
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Redução de 90% no tempo de busca</strong> – de minutos para segundos
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Acesso visual e intuitivo</strong> – usuários não técnicos navegam facilmente
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Rastreabilidade total</strong> – histórico de alterações e controle de acesso
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Facilidade em treinamentos</strong> – novos colaboradores aprendem em minutos
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Escalabilidade nacional</strong> – comporta crescimento ilimitado de unidades
+                    </li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">💻 Stack Tecnológico</h2>
+                
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Camada</th>
+                            <th>Tecnologia</th>
+                            <th>Função</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Frontend</strong></td>
+                            <td>React 18.x</td>
+                            <td>UI interativa e componentização</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Build Tool</strong></td>
+                            <td>Vite</td>
+                            <td>Build rápido e HMR</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estilização</strong></td>
+                            <td>Tailwind CSS 3.x</td>
+                            <td>Design responsivo e utilitário</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Backend</strong></td>
+                            <td>Node.js + Express</td>
+                            <td>API REST para dados logísticos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estado</strong></td>
+                            <td>React Hooks</td>
+                            <td>Gerenciamento de estado local</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ícones</strong></td>
+                            <td>Lucide React</td>
+                            <td>Biblioteca de ícones moderna</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">🏆 Conclusão</h2>
+                
+               
+                
+                <div class="text-block">
+                    Mais do que uma aplicação de consulta, o sistema estabelece uma <strong>base sólida de dados centralizada</strong>, com arquitetura escalável e interface intuitiva que serve como <strong>referência única de verdade</strong> para toda a operação nacional.
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>💡 Visão de Futuro</h4>
+                    <p>
+                        A arquitetura modular do sistema permite <strong>expansões futuras</strong> como: integração com sistemas de gestão de frota, dashboards de performance por unidade, alertas automatizados, relatórios gerenciais e APIs públicas para outros sistemas internos.
+                   
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-title">SHOPEE LOGISTICS · OPERATIONS</div>
+            <p>Locations - Security SPX Brasil</p>
+            <p>Desenvolvido por Renata C. | Analista de Segurança & Automação</p>
+            <p style="margin-top: 20px; font-size: 13px; opacity: 0.8;">
+                © 2025 Shopee Brasil – Documentação Técnica Proprietária
+            </p>
+        </div>
+    </div>
+</body>
+</html>

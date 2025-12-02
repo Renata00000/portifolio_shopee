@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack Tecnológico | Ferramentas & Tecnologias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        /* Background animado */
+        .bg-animated {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 10, 0.85);
+            z-index: 1;
+        }
+        
+        /* Grid de pontos animados */
+        .grid-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: 1;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Header épico */
+        .header {
+            text-align: center;
+            padding: 80px 20px;
+            margin-bottom: 60px;
+        }
+        
+        .header-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .header h1 {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            animation: slideDown 0.8s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header p {
+            font-size: 20px;
+            color: #a78bfa;
+            font-weight: 400;
+            animation: slideDown 0.8s ease-out 0.2s backwards;
+        }
+        
+        /* Stats row */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 50px 0;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: slideUp 0.8s ease-out backwards;
+        }
+        
+        .stat-card:nth-child(1) { animation-delay: 0.3s; }
+        .stat-card:nth-child(2) { animation-delay: 0.4s; }
+        .stat-card:nth-child(3) { animation-delay: 0.5s; }
+        .stat-card:nth-child(4) { animation-delay: 0.6s; }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #667eea, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: #a78bfa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
+        /* Category section */
+        .category-section {
+            margin-bottom: 80px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .category-icon {
+            font-size: 36px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        
+        .category-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #fff;
+        }
+        
+        /* Tech grid */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .tech-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .tech-card:hover::before {
+            left: 100%;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #667eea;
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+        
+        .tech-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .tech-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .tech-description {
+            font-size: 13px;
+            color: #a78bfa;
+            line-height: 1.5;
+        }
+        
+        /* Código inline */
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(102, 126, 234, 0.2);
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: #a78bfa;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 80px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer p {
+            color: #a78bfa;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 48px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .tech-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animated"></div>
+    <div class="bg-overlay"></div>
+    <div class="grid-overlay"></div>
+    
+    <div class="container">
+        <div class="header">
+            <div class="header-badge">🚀 Tech Stack 2025</div>
+            <h1>Stack Tecnológico</h1>
+            <p>Ferramentas & Tecnologias Utilizadas nos Projetos</p>
+            
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-number">40+</div>
+                    <div class="stat-label">Tecnologias</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">08</div>
+                    <div class="stat-label">Projetos</div>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <!-- Frontend -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">🌐</div>
+                <div class="category-title">Frontend & Interface</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">📄</div>
+                    <div class="tech-name">HTML5</div>
+                    <div class="tech-description">Estrutura semântica moderna com formulários, canvas e APIs nativas</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">CSS3</div>
+                    <div class="tech-description">Grid, Flexbox, variáveis CSS, gradientes e animações avançadas</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">JavaScript (ES6+)</div>
+                    <div class="tech-description">Vanilla JS, async/await, modules, fetch API e DOM manipulation</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔷</div>
+                    <div class="tech-name">TypeScript</div>
+                    <div class="tech-description">Tipagem estática, interfaces e maior segurança no código</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">React.js</div>
+                    <div class="tech-description">Componentização, hooks, context API e state management</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">Vite</div>
+                    <div class="tech-description">Build tool ultra-rápido com HMR instantâneo</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">💨</div>
+                    <div class="tech-name">Tailwind CSS</div>
+                    <div class="tech-description">Utility-first CSS framework para estilização rápida</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎬</div>
+                    <div class="tech-name">Framer Motion</div>
+                    <div class="tech-description">Biblioteca de animações declarativas para React</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🅱️</div>
+                    <div class="tech-name">Bootstrap</div>
+                    <div class="tech-description">Framework CSS usado em projetos legacy</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧊</div>
+                    <div class="tech-name">Three.js</div>
+                    <div class="tech-description">Renderização 3D, modelos interativos e animações WebGL</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">Chart.js</div>
+                    <div class="tech-description">Gráficos interativos (linhas, barras, pizza, gauges)</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">✨</div>
+                    <div class="tech-name">Lucide Icons</div>
+                    <div class="tech-description">Biblioteca de ícones moderna e customizável</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Font Awesome</div>
+                    <div class="tech-description">Iconografia profissional versão 6.4.0</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">💅</div>
+                    <div class="tech-name">Styled Components</div>
+                    <div class="tech-description">CSS-in-JS para componentes modulares</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Backend -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">⚙️</div>
+                <div class="category-title">Backend & Servidores</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🟢</div>
+                    <div class="tech-name">Node.js</div>
+                    <div class="tech-description">Runtime JavaScript para backend com event-loop assíncrono</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🚂</div>
+                    <div class="tech-name">Express</div>
+                    <div class="tech-description">Framework minimalista para APIs REST</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">☕</div>
+                    <div class="tech-name">Java (Spring Boot)</div>
+                    <div class="tech-description">Framework enterprise para aplicações robustas</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python</div>
+                    <div class="tech-description">Scripting, automação, análise de dados e IA</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">⚡</div>
+                    <div class="tech-name">FastAPI</div>
+                    <div class="tech-description">Framework Python moderno e ultra-rápido para APIs</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧪</div>
+                    <div class="tech-name">Flask</div>
+                    <div class="tech-description">Microframework Python para projetos experimentais</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">Robot Framework</div>
+                    <div class="tech-description">Automação de testes e processos RPA</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📜</div>
+                    <div class="tech-name">Google Apps Script</div>
+                    <div class="tech-description">Backend serverless integrado ao Google Workspace</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- IA & Processamento -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">🧠</div>
+                <div class="category-title">Inteligência Artificial & Processamento</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">👁️</div>
+                    <div class="tech-name">OpenCV</div>
+                    <div class="tech-description">Visão computacional, tratamento de imagens e vídeos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎯</div>
+                    <div class="tech-name">YOLO</div>
+                    <div class="tech-description">Detecção de objetos em tempo real para contagem</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔍</div>
+                    <div class="tech-name">Detectron</div>
+                    <div class="tech-description">Modelos de visão computacional para segmentação</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📹</div>
+                    <div class="tech-name">SDK Dahua</div>
+                    <div class="tech-description">General_NetSDK para captura RTSP, frames e stream de vídeo</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧮</div>
+                    <div class="tech-name">TensorFlow</div>
+                    <div class="tech-description">Framework de ML para treinamento de modelos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔥</div>
+                    <div class="tech-name">PyTorch</div>
+                    <div class="tech-description">Deep learning framework com GPU acceleration</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📦</div>
+                    <div class="tech-name">Python + IA</div>
+                    <div class="tech-description">Scripts para contagem automática de objetos</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Banco de Dados -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">📦</div>
+                <div class="category-title">Banco de Dados & Persistência</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🐬</div>
+                    <div class="tech-name">MySQL</div>
+                    <div class="tech-description">Banco relacional para dados estruturados</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📊</div>
+                    <div class="tech-name">Google Sheets</div>
+                    <div class="tech-description">Banco dinâmico integrado via Apps Script API</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🗄️</div>
+                    <div class="tech-name">LocalStorage</div>
+                    <div class="tech-description">Armazenamento client-side para cache temporário</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">💾</div>
+                    <div class="tech-name">SessionStorage</div>
+                    <div class="tech-description">Armazenamento de sessão para dados voláteis</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📋</div>
+                    <div class="tech-name">JSON Storage</div>
+                    <div class="tech-description">Armazenamento baseado em JSON para contagens e cadastros</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- APIs & Integrações -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">📡</div>
+                <div class="category-title">APIs & Integrações</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">📜</div>
+                    <div class="tech-name">Google Apps Script</div>
+                    <div class="tech-description">Automação e backend serverless no Google Workspace</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">☁️</div>
+                    <div class="tech-name">Google Drive API</div>
+                    <div class="tech-description">Upload, download e gerenciamento de arquivos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📊</div>
+                    <div class="tech-name">Google Sheets API</div>
+                    <div class="tech-description">Leitura, escrita e manipulação de planilhas</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🏢</div>
+                    <div class="tech-name">APIs Internas SPX</div>
+                    <div class="tech-description">Integração com sistemas de segurança Shopee</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📹</div>
+                    <div class="tech-name">SDK Dahua</div>
+                    <div class="tech-description">Integração com câmeras e NVRs via SDK oficial</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔌</div>
+                    <div class="tech-name">APIs REST</div>
+                    <div class="tech-description">Comunicação HTTP com endpoints externos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🪝</div>
+                    <div class="tech-name">Webhooks</div>
+                    <div class="tech-description">Notificações em tempo real via callbacks HTTP</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧪</div>
+                    <div class="tech-name">Mocks & Testes</div>
+                    <div class="tech-description">Integrações simuladas para ambientes de desenvolvimento</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Automação -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">🤖</div>
+                <div class="category-title">Automação, RPA & Operações</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🤖</div>
+                    <div class="tech-name">Robot Framework</div>
+                    <div class="tech-description">Framework de automação de testes e processos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🌐</div>
+                    <div class="tech-name">Selenium</div>
+                    <div class="tech-description">Automação de browsers para testes E2E</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📜</div>
+                    <div class="tech-name">Apps Script Automation</div>
+                    <div class="tech-description">Cadastros, uploads, pastas e validações automáticas</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🐍</div>
+                    <div class="tech-name">Python Scripts</div>
+                    <div class="tech-description">Coleta, limpeza e processamento de dados</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Infraestrutura -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">🛠️</div>
+                <div class="category-title">Infraestrutura & Ferramentas</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🌳</div>
+                    <div class="tech-name">Git / GitHub</div>
+                    <div class="tech-description">Controle de versão e colaboração de código</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">💻</div>
+                    <div class="tech-name">VS Code</div>
+                    <div class="tech-description">Editor de código principal com extensões</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧠</div>
+                    <div class="tech-name">IntelliJ IDEA</div>
+                    <div class="tech-description">IDE para desenvolvimento Java e Spring Boot</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📮</div>
+                    <div class="tech-name">Postman</div>
+                    <div class="tech-description">Testes de APIs e debugging de endpoints</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎨</div>
+                    <div class="tech-name">Figma</div>
+                    <div class="tech-description">Prototipação de interfaces e design system</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🖼️</div>
+                    <div class="tech-name">Photopea / Adobe</div>
+                    <div class="tech-description">Edição de imagens para portfólio e mockups</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔍</div>
+                    <div class="tech-name">Chrome DevTools</div>
+                    <div class="tech-description">Debugging, performance analysis e network inspection</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔧</div>
+                    <div class="tech-name">XAMPP</div>
+                    <div class="tech-description">Ambiente de desenvolvimento local (testes legacy)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Metodologias -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">📌</div>
+                <div class="category-title">Metodologias & Boas Práticas</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">🏗️</div>
+                    <div class="tech-name">MVT / MVC</div>
+                    <div class="tech-description">Arquitetura em camadas para Java e Python</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🧩</div>
+                    <div class="tech-name">Arquitetura Modular</div>
+                    <div class="tech-description">Separação de responsabilidades e reusabilidade</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">⚛️</div>
+                    <div class="tech-name">Componentização React</div>
+                    <div class="tech-description">Components isolados, reutilizáveis e testáveis</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">✨</div>
+                    <div class="tech-name">Clean Code</div>
+                    <div class="tech-description">Código legível, manutenível e bem documentado</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔖</div>
+                    <div class="tech-name">Versionamento</div>
+                    <div class="tech-description">Git flow estruturado com commits semânticos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📝</div>
+                    <div class="tech-name">Documentação Técnica</div>
+                    <div class="tech-description">Specs, READMEs e documentação de processos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔄</div>
+                    <div class="tech-name">CI Manual</div>
+                    <div class="tech-description">Integração contínua simplificada (CI-lite)</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Específicos de Segurança -->
+        <div class="category-section">
+            <div class="category-header">
+                <div class="category-icon">🎥</div>
+                <div class="category-title">Segurança & Logística</div>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-icon">📹</div>
+                    <div class="tech-name">CFTV Dahua SDK</div>
+                    <div class="tech-description">SDK oficial para integração com câmeras de segurança</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📱</div>
+                    <div class="tech-name">Leitura IMEI/Serial</div>
+                    <div class="tech-description">Identificação automática de dispositivos</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🔍</div>
+                    <div class="tech-name">Scanner Automático</div>
+                    <div class="tech-description">Captura e validação de códigos de barras</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🎫</div>
+                    <div class="tech-name">Automação de Bipagens</div>
+                    <div class="tech-description">Sistema de controle de acesso inteligente</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📊</div>
+                    <div class="tech-name">Dashboards Operacionais</div>
+                    <div class="tech-description">Painéis em tempo real com métricas e KPIs</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">🗺️</div>
+                    <div class="tech-name">Mapas Logísticos</div>
+                    <div class="tech-description">Visualização geográfica de rotas e hubs</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📦</div>
+                    <div class="tech-name">Controle de Fornecedores</div>
+                    <div class="tech-description">Gestão documental e cadastro automatizado</div>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-icon">📸</div>
+                    <div class="tech-name">Processamento de Imagens</div>
+                    <div class="tech-description">Contagem automática de pacotes via visão computacional</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Stack Tecnológico Completo</strong></p>
+            <p>Shopee Brasil | 2025</p>
+            <p style="margin-top: 20px; opacity: 0.7;">Desenvolvido por Renata C. | Analista de Desenvolvimento</p>
+        </div>
+    </div>
+</body>
+</html>

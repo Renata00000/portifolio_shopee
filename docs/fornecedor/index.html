@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestão de Fornecedores | Documentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #667eea;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            border-radius: 3px;
+        }
+        
+        .subsection {
+            margin: 40px 0;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .text-block {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        .text-block strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #1e40af;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .highlight-box p {
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .alert-box h4 {
+            color: #991b1b;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .alert-box p {
+            color: #7f1d1d;
+            line-height: 1.7;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+
+        .feature-description {
+            color: #4a5568;
+            line-height: 1.7;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 6px 0;
+            color: #718096;
+            font-size: 14px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .feature-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: 700;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .status-card {
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .status-valid {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 5px solid #10b981;
+        }
+
+        .status-warning {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 5px solid #f59e0b;
+        }
+
+        .status-expired {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+        }
+
+        .status-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .status-label {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .status-valid .status-label {
+            color: #065f46;
+        }
+
+        .status-warning .status-label {
+            color: #b45309;
+        }
+
+        .status-expired .status-label {
+            color: #991b1b;
+        }
+
+        .status-description {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .status-valid .status-description {
+            color: #047857;
+        }
+
+        .status-warning .status-description {
+            color: #92400e;
+        }
+
+        .status-expired .status-description {
+            color: #7f1d1d;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .comparison-before {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+        }
+
+        .comparison-after {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 5px solid #10b981;
+        }
+
+        .comparison-card h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .comparison-before h4 {
+            color: #991b1b;
+        }
+
+        .comparison-after h4 {
+            color: #065f46;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .comparison-before li {
+            color: #7f1d1d;
+        }
+
+        .comparison-after li {
+            color: #065f46;
+        }
+
+        .comparison-before li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .comparison-after li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .tech-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tech-table thead {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+        }
+        
+        .tech-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .tech-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        
+        .tech-table tbody tr {
+            background: white;
+            transition: all 0.2s ease;
+        }
+        
+        .tech-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .tech-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #a0aec0;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #667eea;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+            
+            .header, .content {
+                padding: 40px 30px;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .comparison-grid, .feature-grid, .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="badge">📋 SHOPEE HSE · GESTÃO AUTOMATIZADA</div>
+                <h1>Sistema de Gestão de Fornecedores</h1>
+                <p class="subtitle">Plataforma Automatizada para Controle de Prestadores de Serviços e Documentações via Google Apps Script</p>
+                
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Automação do Processo</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">Drive</div>
+                        <div class="stat-label">Estrutura Automática</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">Real-time</div>
+                        <div class="stat-label">Alertas de Vencimento</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">Duplo</div>
+                        <div class="stat-label">Painel Admin + Cliente</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">📋 Visão Geral do Projeto</h2>
+                
+                <div class="text-block">
+                    O <strong>Sistema de Gestão de Fornecedores e Colaboradores</strong> foi desenvolvido em <strong>Google Apps Script</strong> com integração direta ao Google Drive e Google Sheets, com o objetivo de <strong>centralizar e automatizar o gerenciamento de prestadores de serviços</strong> e suas respectivas documentações.
+                </div>
+                
+                <div class="alert-box">
+                    <h4>⚠️ O Problema Original</h4>
+                    <p>
+                        O controle era realizado de forma <strong>manual e descentralizada</strong>, com trocas de e-mails, mensagens via WhatsApp e armazenamento disperso em diversas pastas. Essa falta de padronização resultava em <strong>retrabalho, atrasos, inconsistências documentais e ausência de rastreabilidade</strong> no fluxo de envio, validação e atualização de certificados.
+                    </p>
+                </div>
+                
+                <div class="text-block">
+                    O novo sistema <strong>digitaliza e automatiza todo o processo</strong> — do cadastro à validação — garantindo organização, segurança e agilidade na gestão de fornecedores e seus colaboradores.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎯 Funcionalidades Principais</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧍</div>
+                        <div class="feature-title">Cadastro de Pessoas</div>
+                        <div class="feature-description">
+                            Interface permite escolher entre Pessoa Física e Pessoa Jurídica com fluxos automatizados distintos.
+                        </div>
+                        <ul class="feature-list">
+                            <li>PJ: cria pasta automática no Drive (CNPJ/Fornecedor/Colaborador)</li>
+                            <li>PF: identifica CNPJ vinculado e armazena na subpasta correta</li>
+                            <li>Organização automática garantida</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📂</div>
+                        <div class="feature-title">Upload de Documentos</div>
+                        <div class="feature-description">
+                            Interface de cadastro com upload múltiplo de PDFs e feedback visual dinâmico.
+                        </div>
+                        <ul class="feature-list">
+                            <li>Campos ficam verdes quando arquivo carregado</li>
+                            <li>Validação automática de formato</li>
+                            <li>Armazenamento direto no Drive estruturado</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <div class="feature-title">Alertas Automáticos</div>
+                        <div class="feature-description">
+                            Sistema de notificações por e-mail conforme vencimento de documentos se aproxima.
+                        </div>
+                        <ul class="feature-list">
+                            <li>Alertas enviados automaticamente</li>
+                            <li>Notificações aos responsáveis</li>
+                            <li>Evita vencimentos sem acompanhamento</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🧭</div>
+                        <div class="feature-title">Painel Administrativo</div>
+                        <div class="feature-description">
+                            Acesso restrito via login com visão completa de todas as empresas e colaboradores.
+                        </div>
+                        <ul class="feature-list">
+                            <li>Acordeon dinâmico listando empresas</li>
+                            <li>Expansão mostra colaboradores e status</li>
+                            <li>CRUD completo via modal</li>
+                            <li>Exclusão, atualização e inclusão de colaboradores</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <div class="feature-title">Painel do Cliente</div>
+                        <div class="feature-description">
+                            Acesso próprio autenticado pelo CNPJ para cada fornecedor gerenciar seus dados.
+                        </div>
+                        <ul class="feature-list">
+                            <li>Exibe apenas dados da própria empresa</li>
+                            <li>Adicionar, editar ou excluir colaboradores</li>
+                            <li>Atualizar documentações de forma independente</li>
+                            <li>Mesmo layout do admin com permissões restritas</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-title">Status Documentais</div>
+                        <div class="feature-description">
+                            Sistema visual de status coloridos para cada documento cadastrado.
+                        </div>
+                        <ul class="feature-list">
+                            <li>Verde: Válido</li>
+                            <li>Amarelo: Próximo do vencimento (até 15 dias)</li>
+                            <li>Vermelho: Vencido</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">📁 Estrutura Automática do Drive</h2>
+                
+                <div class="text-block">
+                    O sistema gera automaticamente uma <strong>estrutura hierárquica organizada</strong> no Google Drive para cada empresa cadastrada:
+                </div>
+
+                <div class="highlight-box">
+                    <h4>📂 Estrutura Gerada Automaticamente</h4>
+                    <p style="font-family: 'Courier New', monospace; background: rgba(255,255,255,0.6); padding: 20px; border-radius: 8px; margin-top: 15px; line-height: 2;">
+                        📁 <strong>[CNPJ da Empresa]</strong><br>
+                        &nbsp;&nbsp;&nbsp;├─ 📁 <strong>Fornecedor</strong> (docs da empresa)<br>
+                        &nbsp;&nbsp;&nbsp;└─ 📁 <strong>Colaborador</strong> (docs dos funcionários)
+                    </p>
+                </div>
+
+                <div class="text-block">
+                    Cada operação de cadastro é <strong>vinculada diretamente à estrutura de diretórios</strong>, garantindo rastreabilidade e fácil auditoria. Pessoas físicas cadastradas são automaticamente organizadas na subpasta "Colaborador" da empresa correspondente.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎨 Sistema de Status Visual</h2>
+                
+                <div class="status-grid">
+                    <div class="status-card status-valid">
+                        <div class="status-icon">🟢</div>
+                        <div class="status-label">Válido</div>
+                        <div class="status-description">
+                            Documento dentro do prazo de validade
+                        </div>
+                    </div>
+
+                    <div class="status-card status-warning">
+                        <div class="status-icon">🟡</div>
+                        <div class="status-label">Próximo do Vencimento</div>
+                        <div class="status-description">
+                            Faltam até 15 dias para o vencimento
+                        </div>
+                    </div>
+
+                    <div class="status-card status-expired">
+                        <div class="status-icon">🔴</div>
+                        <div class="status-label">Vencido</div>
+                        <div class="status-description">
+                            Documento fora do prazo de validade
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">📊 Antes vs Depois</h2>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card comparison-before">
+                        <h4>✗ Processo Manual Anterior</h4>
+                        <ul>
+                            <li>Envio de documentos por e-mail e WhatsApp</li>
+                            <li>Armazenamento disperso em diversas pastas</li>
+                            <li>Zero padronização de nomenclatura</li>
+                            <li>Controle manual via planilhas</li>
+                            <li>Retrabalho constante</li>
+                            <li>Atrasos na validação</li>
+                            <li>Inconsistências documentais</li>
+                            <li>Ausência de rastreabilidade</li>
+                            <li>Sem alertas automatizados</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card comparison-after">
+                        <h4>✓ Sistema Automatizado Atual</h4>
+                        <ul>
+                            <li>Cadastro direto via interface web</li>
+                            <li>Estrutura automática e organizada no Drive</li>
+                            <li>Padronização total de nomenclatura</li>
+                            <li>Controle automatizado em tempo real</li>
+                            <li>Zero retrabalho</li>
+                            <li>Validação ágil e eficiente</li>
+                            <li>Documentações sempre atualizadas</li>
+                            <li>Rastreabilidade completa</li>
+                            <li>Alertas automáticos por e-mail</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎯 Impacto e Benefícios Operacionais</h2>
+                
+                <div class="highlight-box">
+                    <h4>✅ Transformação Digital</h4>
+                    <p>
+                        <strong>Antes:</strong> Processo manual, descentralizado e suscetível a erros, com documentos perdidos entre e-mails e pastas desorganizadas.<br><br>
+                        <strong>Depois:</strong> Sistema digital completo, centralizado e automatizado, com estrutura organizada, alertas inteligentes e autonomia para fornecedores.
+                    </p>
+                </div>
+                
+                <div class="text-block" style="margin-top: 30px;">
+                    <strong>📊 Ganhos Mensuráveis:</strong>
+                </div>
+                
+                <ul style="list-style: none; padding-left: 0;">
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Redução de retrabalho e erros manuais</strong> no envio e controle de documentos
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Agilidade no processo de validação</strong> e atualização documental
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Organização automática e padronizada</strong> no Google Drive
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Alertas inteligentes</strong> evitam vencimento de certificações
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Controle de acesso e rastreabilidade</strong> por empresa e colaborador
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Autonomia para fornecedores</strong> manterem cadastros atualizados
+                    </li>
+                    <li style="padding: 10px 0; position: relative; padding-left: 30px;">
+                        <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                        <strong>Maior visibilidade e conformidade</strong> operacional
+                    </li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">💻 Stack Tecnológico</h2>
+                
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Camada</th>
+                            <th>Tecnologia</th>
+                            <th>Função</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Backend</strong></td>
+                            <td>Google Apps Script</td>
+                            <td>Lógica principal e automações</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Armazenamento</strong></td>
+                            <td>Google Drive API</td>
+                            <td>Estrutura de pastas e arquivos</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Banco de Dados</strong></td>
+                            <td>Google Sheets</td>
+                            <td>Controle de cadastros e status</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Frontend</strong></td>
+                            <td>HTML5 + CSS3 + JavaScript</td>
+                            <td>Interface web responsiva</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Notificações</strong></td>
+                            <td>Gmail API (SMTP)</td>
+                            <td>Alertas automáticos por e-mail</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Autenticação</strong></td>
+                            <td>Login via CNPJ/Senha</td>
+                            <td>Controle de acesso segmentado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🔄 Transferência de Responsabilidade</h2>
+                
+                <div class="text-block">
+                    Uma das maiores transformações do sistema foi a <strong>transferência de responsabilidade operacional</strong> do time interno para os próprios fornecedores.
+                </div>
+
+                <div class="alert-box">
+                    <h4>⚠️ Como Era Antes</h4>
+                    <p>
+                        Todo o processo de controle e monitoramento de vencimento de certificações era feito <strong>manualmente pela equipe da Shopee</strong>. Além de cadastrar as empresas, a equipe precisava:
+                    </p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li style="padding: 6px 0; color: #7f1d1d; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #dc2626; font-weight: 700;">✗</span>
+                            Cadastrar manualmente todos os colaboradores de cada fornecedor
+                        </li>
+                        <li style="padding: 6px 0; color: #7f1d1d; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #dc2626; font-weight: 700;">✗</span>
+                            Atualizar documentações vencidas mediante envio por e-mail/WhatsApp
+                        </li>
+                        <li style="padding: 6px 0; color: #7f1d1d; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #dc2626; font-weight: 700;">✗</span>
+                            Excluir colaboradores desligados informados pelos fornecedores
+                        </li>
+                        <li style="padding: 6px 0; color: #7f1d1d; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #dc2626; font-weight: 700;">✗</span>
+                            Adicionar novos colaboradores enviados pelas empresas
+                        </li>
+                        <li style="padding: 6px 0; color: #7f1d1d; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #dc2626; font-weight: 700;">✗</span>
+                            Monitorar vencimentos e cobrar atualizações manualmente
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h4>✅ Como Funciona Agora</h4>
+                    <p>
+                        Cada empresa possui <strong>acesso próprio via CNPJ/Senha</strong> ao Painel do Cliente, onde pode gerenciar <strong>autonomamente</strong> todos os seus colaboradores e documentações:
+                    </p>
+                    <ul style="list-style: none; padding-left: 0; margin-top: 15px;">
+                        <li style="padding: 6px 0; color: #065f46; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                            Adicionar novos colaboradores diretamente pelo sistema
+                        </li>
+                        <li style="padding: 6px 0; color: #065f46; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                            Atualizar documentações vencidas ou próximas do vencimento
+                        </li>
+                        <li style="padding: 6px 0; color: #065f46; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                            Excluir colaboradores desligados sem intermediação
+                        </li>
+                        <li style="padding: 6px 0; color: #065f46; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                            Visualizar status de todos os documentos em tempo real
+                        </li>
+                        <li style="padding: 6px 0; color: #065f46; padding-left: 25px; position: relative;">
+                            <span style="position: absolute; left: 0; color: #10b981; font-weight: 700;">✓</span>
+                            Receber alertas automáticos de vencimentos próximos
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="text-block" style="margin-top: 30px;">
+                    Essa mudança representa uma <strong>redução drástica de carga operacional</strong> para a equipe da Shopee, que agora atua apenas como <strong>gestora e auditora do processo</strong>, enquanto os fornecedores assumem a responsabilidade pela manutenção de seus próprios dados.
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">🏆 Conclusão</h2>
+                
+                <div class="text-block">
+                    O <strong>Sistema de Gestão de Fornecedores</strong> transformou completamente a forma como a Shopee gerencia suas parcerias e conformidades documentais. De um processo totalmente manual, descentralizado e dependente da equipe interna, passou-se a um <strong>sistema digital, automatizado e autônomo</strong>.
+                </div>
+                
+                <div class="text-block">
+                    A solução não apenas eliminou retrabalho e aumentou a eficiência operacional, mas também <strong>empoderou os fornecedores</strong>, dando-lhes autonomia para gerenciar seus próprios colaboradores e documentações, resultando em uma relação mais transparente, ágil e escalável entre todas as partes envolvidas.
+                </div>
+                
+               
+            </section>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-title">SHOPEE HSE · COMPLIANCE</div>
+            <p>Sistema de Gestão de Fornecedores – Plataforma Automatizada de Controle Documental</p>
+            <p>Desenvolvido por Renata C. | Analista de Segurança & Desenvolvimento</p>
+            <p style="margin-top: 20px; font-size: 13px; opacity: 0.8;">
+                © 2025 Shopee Brasil – Documentação Técnica Proprietária
+            </p>
+        </div>
+    </div>
+</body>
+</html>

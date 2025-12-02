@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Segurança - Fluxos Operacionais | Documentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #FF6600 0%, #EE4D2D 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #FF6600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #FF6600, #EE4D2D);
+            border-radius: 3px;
+        }
+        
+        .subsection {
+            margin: 40px 0;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #FF6600;
+        }
+        
+        .text-block {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        .text-block strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #fff5eb 0%, #ffe8d9 100%);
+            border-left: 5px solid #FF6600;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #c53030;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .highlight-box p {
+            color: #744210;
+            line-height: 1.7;
+        }
+        
+        .objectives-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .objective-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            border-left: 5px solid #FF6600;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .objective-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(255,102,0,0.15);
+        }
+
+        .objective-number {
+            flex-shrink: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #FF6600, #EE4D2D);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .objective-content h4 {
+            color: #2d3748;
+            font-size: 18px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .objective-content p {
+            color: #4a5568;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #FF6600;
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .feature-description {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .process-list {
+            display: grid;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .process-item {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .process-item:hover {
+            border-color: #FF6600;
+            box-shadow: 0 5px 20px rgba(255,102,0,0.1);
+        }
+
+        .process-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .process-content h4 {
+            color: #2d3748;
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .process-content p {
+            color: #4a5568;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: #FF6600;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .comparison-before {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+        }
+
+        .comparison-after {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 5px solid #10b981;
+        }
+
+        .comparison-card h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .comparison-before h4 {
+            color: #991b1b;
+        }
+
+        .comparison-after h4 {
+            color: #065f46;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .comparison-before li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .comparison-after li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #a0aec0;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #FF6600;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+            
+            .header, .content {
+                padding: 40px 30px;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="badge">🛡️ SHOPEE SECURITY · SISTEMA DE GESTÃO OPERACIONAL</div>
+                <h1>Central de Segurança</h1>
+                <p class="subtitle">Fluxos Operacionais e Organograma Hierárquico da CCO</p>
+                
+                <div class="stats-row">
+                   
+                    <div class="stat-box">
+                        <div class="stat-value">100%</div>
+                        <div class="stat-label">Fluxos Padronizados</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">2</div>
+                        <div class="stat-label">Módulos Integrados</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">📋 Visão Geral do Projeto</h2>
+                
+                <div class="text-block">
+                    O <strong>Sistema Central de Segurança</strong> foi desenvolvido para <strong>organizar, padronizar e digitalizar</strong> todos os fluxos operacionais da <strong>CCO (Central de Controle Operacional)</strong>, que até então funcionava de forma <strong>totalmente desestruturada</strong>.
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>⚠️ O Cenário Anterior</h4>
+                    <p>
+                        Antes deste projeto, <strong>não existia registros ou documentação formal</strong> de processos. Cada operador executava suas tarefas com base em <strong>experiências anteriores ou repasses informais</strong>. As operações eram transmitidas <strong>verbalmente, sem padronização, controle de fluxo ou rastreabilidade</strong>, o que comprometia a eficiência da central, a visibilidade das ações e a capacidade de auditoria.
+                    </p>
+                    <p style="margin-top: 12px;">
+                        Não havia registro de <strong>quem fez o quê, quando e por quê</strong>.
+                    </p>
+                </div>
+                
+                <div class="text-block">
+                    A partir dessa necessidade surgiu <strong>a plataforma</strong>, que centraliza todos os fluxos operacionais, ferramentas utilizadas, responsabilidades e estruturas hierárquicas da equipe. A plataforma não apenas documenta o que é feito, mas <strong>define como deve ser feito</strong>, criando uma base sólida para treinamentos, auditorias e gestão estratégica.
+                </div>
+                
+                <div class="text-block">
+                    O sistema foi desenhado para oferecer <strong>transparência, rastreabilidade e padronização</strong> nas rotinas da equipe de segurança, integrando fluxogramas dinâmicos, descrições operacionais detalhadas, ferramentas utilizadas e perguntas frequentes (FAQ). Além disso, inclui um <strong>organograma hierárquico interativo</strong>, que exibe a estrutura completa da equipe.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎯 Objetivos Principais</h2>
+                
+                <div class="text-block">
+                    O projeto foi desenvolvido com os seguintes objetivos estratégicos:
+                </div>
+
+                <ul class="simple-objectives">
+                    <li><strong>Estruturar e documentar</strong> todos os fluxos de operação da CCO</li>
+                    <li><strong>Padronizar etapas e decisões</strong> em processos operacionais</li>
+                    <li><strong>Reduzir a dependência</strong> de conhecimento verbal e informal</li>
+                    <li><strong>Melhorar a comunicação</strong> entre turnos e setores</li>
+                    <li><strong>Garantir rastreabilidade total</strong> das rotinas</li>
+                    <li><strong>Criar uma visão integrada</strong> entre organograma de equipe e processos operacionais</li>
+                    <li><strong>Estabelecer uma base sólida</strong> para treinamento, integração e auditoria</li>
+                    <li><strong>Aumentar a eficiência, autonomia</strong> e clareza operacional</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🏗️ Estrutura do Sistema</h2>
+                
+                <div class="subsection">
+                    <h3 class="subsection-title">Módulo 1:Fluxos Operacionais</h3>
+                    
+                    <div class="text-block">
+                        O painel principal reúne <strong>todos os processos mapeados e documentados da CCO</strong>. Cada card representa um fluxo de operação completo, desenvolvido a partir de <strong>entrevistas e acompanhamento direto com as equipes operacionais</strong>, traduzindo o conhecimento prático do time em documentação visual e funcional.
+                    </div>
+                    
+                    <div class="text-block">
+                        Cada processo é composto por <strong>quatro blocos principais</strong>:
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">📘</div>
+                            <div class="feature-name">Descrição Detalhada</div>
+                            <div class="feature-description">
+                                Apresenta o objetivo, escopo e responsabilidades de cada rotina, explicando o propósito e as etapas envolvidas.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔀</div>
+                            <div class="feature-name">Fluxograma Operacional</div>
+                            <div class="feature-description">
+                                Exibe graficamente as decisões, condições e caminhos lógicos do processo, facilitando o entendimento visual do fluxo.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🧰</div>
+                            <div class="feature-name">Ferramentas Utilizadas</div>
+                            <div class="feature-description">
+                                Lista e descreve os sistemas, plataformas e recursos aplicados em cada etapa do processo.
+                            </div>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">❓</div>
+                            <div class="feature-name">Perguntas Frequentes (FAQ)</div>
+                            <div class="feature-description">
+                                Cobre exceções, dúvidas comuns e tratativas padronizadas, reduzindo dependência de conhecimento informal.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Módulo 2: Organograma Hierárquico Interativo</h3>
+                    
+                    <div class="text-block">
+                        O segundo módulo do sistema é um <strong>organograma visual e dinâmico</strong>, que representa a estrutura humana da CCO. Cada colaborador é exibido com foto, cargo, nome e turno, e ao passar o cursor sobre o card, o sistema <strong>expande automaticamente</strong>, exibindo suas principais funções, responsabilidades e horários de trabalho.
+                    </div>
+                    
+                    <div class="highlight-box" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); border-left-color: #3b82f6;">
+                        <h4 style="color: #1e40af;">💡 Destaque do Organograma</h4>
+                        <p style="color: #1e3a8a;">
+                            Esse recurso garante <strong>transparência organizacional</strong> e fortalece a comunicação entre turnos e setores, tornando clara a relação entre estrutura humana e processos operacionais. A integração entre o organograma e os fluxos de processo permite que a CCO tenha, pela primeira vez, uma <strong>visão completa, integrada e atualizada</strong> de sua operação – tanto em nível de pessoas quanto de execução.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            
+
+            <section class="section">
+                <h2 class="section-title">🔄 Antes vs Depois</h2>
+                
+                <div class="comparison-box">
+                    <div class="comparison-card comparison-before">
+                        <h4>❌ Cenário Anterior</h4>
+                        <ul>
+                            <li>Processos totalmente verbais e informais</li>
+                            <li>Cada operador executava de forma diferente</li>
+                            <li>Impossível rastrear ações e responsabilidades</li>
+                            <li>Comunicação fragmentada entre turnos</li>
+                            <li>Dependência crítica de conhecimento tácito</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card comparison-after">
+                        <h4>✅ Após Implementação</h4>
+                        <ul>
+                            <li>100% dos processos documentados visualmente</li>
+                            <li>Fluxos padronizados e acessíveis a todos</li>
+                            <li>Execução consistente entre todos os operadores</li>
+                            <li>Treinamento estruturado em dias</li>
+                            <li>Rastreabilidade completa de todas as ações</li>
+                            <li>Comunicação transparente e organizada</li>
+                            <li>Conhecimento formal e escalável</li>
+                            <li>Auditorias precisas e baseadas em dados</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">💻 Stack Tecnológico</h2>
+                
+                <div class="tech-stack">
+                    <div class="tech-badge">HTML5</div>
+                    <div class="tech-badge">CSS3</div>
+                    <div class="tech-badge">JavaScript</div>
+                    <div class="tech-badge">Mermaid.js</div>
+                    <div class="tech-badge">Design Responsivo</div>
+                </div>
+
+                  </section>
+
+       <div class="footer">
+            <div class="footer-title">SHOPEE LOGISTICS · SECURITY</div>
+            <p>Sistema de Fluxo – Plataforma de Processos CCO</p>
+            <p>Desenvolvido por Renata C. | Analista de Segurança & Automação</p>
+            <p style="margin-top: 20px; font-size: 13px; opacity: 0.8;">
+                © 2025 Shopee Brasil – Documentação Técnica Proprietária
+            </p>
+        </div>
+    </div>
+</body>
+</html>

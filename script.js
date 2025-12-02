@@ -112,11 +112,11 @@ function createParticles() {
   if (!particlesContainer) return;
   
   const colors = [
-    'rgba(102, 126, 234, 0.4)',
-    'rgba(118, 75, 162, 0.4)',
+    'rgba(119, 139, 233, 0.4)',
+    'rgba(79, 109, 172, 0.4)',
     'rgba(6, 182, 212, 0.4)',
     'rgba(59, 130, 246, 0.4)',
-    'rgba(16, 185, 129, 0.4)',
+    'rgba(18, 187, 130, 0.4)',
     'rgba(245, 158, 11, 0.4)',
     'rgba(139, 92, 246, 0.4)',
     'rgba(99, 102, 241, 0.4)'
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inicializa todas as funcionalidades
   observeRows();
   createParticles();
-  addCursorTrail();
+  //addCursorTrail();
   addCardEffects();
   smoothScroll();
   showLoadingAnimation();

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Projetos | Documentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #8b5cf6;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #8b5cf6, #ec4899);
+            border-radius: 3px;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #8b5cf6;
+        }
+        
+        .text-block {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        .text-block strong {
+            color: #2d3748;
+            font-weight: 700;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #f3e8ff 0%, #fce7f3 100%);
+            border-left: 6px solid #8b5cf6;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+        }
+        
+        .highlight-box h4 {
+            color: #6b21a8;
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .highlight-box p {
+            color: #6b46c1;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+        
+        .custom-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 20px 0;
+        }
+        
+        .custom-list li {
+            padding: 12px 0 12px 35px;
+            position: relative;
+            font-size: 16px;
+            color: #4a5568;
+        }
+        
+        .custom-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #8b5cf6;
+            font-weight: 900;
+            font-size: 20px;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #8b5cf6;
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 12px;
+        }
+        
+        .feature-description {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+        }
+        
+        .tech-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+        
+        .tech-table thead {
+            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+            color: white;
+        }
+        
+        .tech-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+        
+        .tech-table td {
+            padding: 16px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+        }
+        
+        .tech-table tbody tr {
+            background: white;
+            transition: all 0.2s ease;
+        }
+        
+        .tech-table tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .tech-table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #a0aec0;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #8b5cf6;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+            
+            .header, .content {
+                padding: 40px 30px;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="badge">🎨 PORTFOLIO · SHOWCASE DE PROJETOS</div>
+                <h1>Portfólio de Projetos</h1>
+                <p class="subtitle">Plataforma Visual e Interativa para Apresentação de Soluções Técnicas</p>
+                
+                
+            </div>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">📋 Visão Geral</h2>
+                
+                <div class="text-block">
+                    O <strong>Portfólio de Projetos</strong> é uma plataforma web interativa desenvolvida para apresentar de forma visual e profissional todos os projetos técnicos desenvolvidos na Shopee ao longo de 2025.
+                </div>
+                
+                <div class="highlight-box">
+                    <h4>🎯 Objetivo</h4>
+                    <p>
+                        Criar uma interface moderna, dinâmica e visualmente atraente que permita navegação fluida entre  projetos diferentes, exibindo screenshots, descrições técnicas, stacks tecnológicos e documentações completas — tudo em uma experiência unificada sem necessidade de recarregar a página.
+                    </p>
+                </div>
+                
+                <div class="text-block">
+                    O projeto combina <strong>HTML5, CSS3 e JavaScript puro</strong> para criar uma experiência rica com animações, efeitos visuais e interatividade, tudo otimizado para performance e responsividade.
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">✨ Recursos Visuais e Interativos</h2>
+                
+                <div class="feature-grid">
+                   
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-title">Modal de Imagens</div>
+                        <div class="feature-description">
+                            Visualização em tela cheia de screenshots com fade effect e controles de navegação.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-title">Navegação Dinâmica</div>
+                        <div class="feature-description">
+                            Troca de projetos sem reload da página, usando JavaScript para atualizar conteúdo dinamicamente.
+                        </div>
+                    </div>
+                    
+                   
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎭</div>
+                        <div class="feature-title">Hover Effects</div>
+                        <div class="feature-description">
+                            Cards com rotação 3D, scale e shadows ao passar o mouse, criando feedback visual rico.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📜</div>
+                        <div class="feature-title">Scroll Animations</div>
+                        <div class="feature-description">
+                            Intersection Observer detecta elementos visíveis e dispara animações ao rolar a página.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-title">Responsive Design</div>
+                        <div class="feature-description">
+                            Layout adaptável para desktop, tablet e mobile com breakpoints otimizados.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">Performance First</div>
+                        <div class="feature-description">
+                            Otimizações para carregamento rápido, lazy loading e animações GPU-accelerated.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">♿</div>
+                        <div class="feature-title">Acessibilidade</div>
+                        <div class="feature-description">
+                            Navegação por teclado, contraste adequado e estrutura semântica HTML5.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-title">Stack Display</div>
+                        <div class="feature-description">
+                            Exibição visual das tecnologias usadas em cada projeto com ícones e tooltips.
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">💻 Stack Tecnológico</h2>
+                
+                <table class="tech-table">
+                    <thead>
+                        <tr>
+                            <th>Camada</th>
+                            <th>Tecnologia</th>
+                            <th>Versão/Detalhes</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Estrutura</strong></td>
+                            <td>HTML5</td>
+                            <td>Semântica moderna (~960 linhas)</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estilização</strong></td>
+                            <td>CSS3</td>
+                            <td>Variáveis, Grid, Flexbox (~1500 linhas)</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interatividade</strong></td>
+                            <td>JavaScript Vanilla</td>
+                            <td>ES6+ (~650 linhas)</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ícones</strong></td>
+                            <td>Font Awesome</td>
+                            <td>6.4.0</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fontes</strong></td>
+                            <td>Google Fonts</td>
+                            <td>Inter (weights 300-900)</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Animações</strong></td>
+                            <td>CSS Keyframes + Transitions</td>
+                            <td>GPU-accelerated transforms</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Observer API</strong></td>
+                            <td>Intersection Observer</td>
+                            <td>Scroll animations nativas</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Layout</strong></td>
+                            <td>CSS Grid + Flexbox</td>
+                            <td>Responsive design</td>
+                            <td><span class="status-badge status-active">Ativo</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            
+            <section class="section">
+                <h2 class="section-title">🏗️ Arquitetura e Organização</h2>
+                
+                <div class="text-block">
+                    O código foi estruturado de forma modular e organizada para facilitar manutenção e escalabilidade:
+                </div>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <div class="feature-title">CSS Modular</div>
+                        <div class="feature-description">
+                            Separação lógica: Reset → Variáveis → Layout → Componentes → Animações → Responsivo.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-title">Variáveis CSS</div>
+                        <div class="feature-description">
+                            Paleta de cores, espaçamentos e tipografia centralizados para fácil manutenção.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚙️</div>
+                        <div class="feature-title">JavaScript Modular</div>
+                        <div class="feature-description">
+                            Funções separadas por responsabilidade: navegação, modal, animações, partículas.
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-title">Performance First</div>
+                        <div class="feature-description">
+                            Debouncing em eventos, lazy loading, requestAnimationFrame para animações.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="subsection" style="margin-top: 40px;">
+                    <h3 class="subsection-title">Estrutura de Código</h3>
+                    <ul class="custom-list">
+                        <li><strong>HTML (~960 linhas):</strong> Estrutura semântica com 17 seções de projetos, modal de imagens, sidebar de navegação</li>
+                        <li><strong>CSS (~1500 linhas):</strong> Reset CSS, variáveis, layout grid/flexbox, componentes estilizados, animações keyframes, media queries</li>
+                        <li><strong>JavaScript (~650 linhas):</strong> Navegação dinâmica, modal controller, scroll animations, counter animations, partículas, cursor trail</li>
+                    </ul>
+                </div>
+            </section>
+            
+           
+            
+            <section class="section">
+                <h2 class="section-title">🎯 Características Técnicas</h2>
+                
+                <div class="feature-grid">
+                    
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <div class="feature-title">Browser Support</div>
+                        <div class="feature-description">
+                            Chrome, Firefox, Safari, Edge (versões modernas com ES6+)
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <div class="feature-title">Mobile First</div>
+                        <div class="feature-description">
+                            Design responsivo desde o início, otimizado para todos os dispositivos
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-title">Performance</div>
+                        <div class="feature-description">
+                            Carregamento < 1s em conexões rápidas, animações 60fps
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">♿</div>
+                        <div class="feature-title">Acessibilidade</div>
+                        <div class="feature-description">
+                            Navegação por teclado, contraste WCAG AA, HTML semântico
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-title">Customização</div>
+                        <div class="feature-description">
+                            Variáveis CSS facilitam mudanças de cores e espaçamentos
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+           
+        </div>
+        
+        <div class="footer">
+            <div class="footer-title">SHOPEE BRASIL · PORTFOLIO</div>
+            <p>Portfólio de Projetos Técnicos 2025</p>
+            <p>Desenvolvido por Renata C. | Analista de Desenvolvimento</p>
+            <p style="margin-top: 20px; font-size: 13px; opacity: 0.8;">
+                © 2025 Shopee Brasil – Documentação Técnica Proprietária
+            </p>
+        </div>
+    </div>
+</body>
+</html>

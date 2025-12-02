@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VisionSafe DSS Monitor | Documentação Técnica</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: #1a202c;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: white;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            padding: 60px 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            line-height: 1.1;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .header .subtitle {
+            font-size: 20px;
+            font-weight: 400;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 60px 50px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1e40af;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 40px;
+            background: linear-gradient(180deg, #1e40af, #3b82f6);
+            border-radius: 3px;
+        }
+        
+        .subsection {
+            margin: 40px 0;
+        }
+        
+        .subsection-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .text-block {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #4a5568;
+            margin-bottom: 25px;
+        }
+        
+        .text-block strong {
+            color: #2d3748;
+            font-weight: 600;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-left: 5px solid #3b82f6;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        
+        .highlight-box h4 {
+            color: #1e40af;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .highlight-box p {
+            color: #1e3a8a;
+            line-height: 1.7;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .alert-box h4 {
+            color: #991b1b;
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .alert-box p {
+            color: #7f1d1d;
+            line-height: 1.7;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .feature-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .feature-description {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        .tech-flow {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px dashed #e2e8f0;
+        }
+
+        .flow-step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .flow-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(30,64,175,0.3);
+        }
+
+        .flow-content h4 {
+            color: #1e40af;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .flow-content p {
+            color: #4a5568;
+            line-height: 1.7;
+        }
+
+        .flow-content code {
+            background: #f7fafc;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #1e40af;
+            font-family: 'Courier New', monospace;
+        }
+
+        .code-block {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .code-block code {
+            color: #60a5fa;
+        }
+
+        .comparison-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .comparison-card {
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .comparison-before {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            border-left: 5px solid #dc2626;
+        }
+
+        .comparison-after {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-left: 5px solid #10b981;
+        }
+
+        .comparison-card h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .comparison-before h4 {
+            color: #991b1b;
+        }
+
+        .comparison-after h4 {
+            color: #065f46;
+        }
+
+        .comparison-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .comparison-card li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .comparison-before li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: #dc2626;
+            font-weight: 700;
+        }
+
+        .comparison-after li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-weight: 700;
+        }
+
+        .challenge-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .challenge-table thead {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .challenge-table th {
+            padding: 18px 20px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .challenge-table td {
+            padding: 18px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .challenge-table tbody tr {
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+        .challenge-table tbody tr:hover {
+            background: #f7fafc;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-badge {
+            background: #1e40af;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+            color: #a0aec0;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        
+        .footer-title {
+            color: #3b82f6;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        
+        .footer p {
+            line-height: 1.7;
+            margin: 10px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                border-radius: 16px;
+            }
+            
+            .header, .content {
+                padding: 40px 30px;
+            }
+            
+            .header h1 {
+                font-size: 36px;
+            }
+            
+            .stats-row {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .comparison-box {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-step {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="badge">📹 SHOPEE SECURITY · MONITORAMENTO EM TEMPO REAL</div>
+                <h1>Painele de  Cameras DSS</h1>
+                <p class="subtitle">Integração Avançada com API Dahua para Auditoria e Monitoramento Automatizado de Câmeras</p>
+                
+                <div class="stats-row">
+                   
+                    <div class="stat-box">
+                        <div class="stat-value">Real-time</div>
+                        <div class="stat-label">Detecção de Falhas</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">MD5</div>
+                        <div class="stat-label">Autenticação Dupla</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">Nacional</div>
+                        <div class="stat-label">Cobertura Completa</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <section class="section">
+                <h2 class="section-title">📋 Visão Geral do Projeto</h2>
+                
+                <div class="text-block">
+                    O <strong>Painel</strong> foi desenvolvido para solucionar um dos maiores pontos de falha da <strong>Central de Controle Operacional (CCO)</strong>: a ausência de rastreabilidade e agilidade na detecção de câmeras inoperantes no sistema. <strong></strong>.
+                </div>
+                
+                <div class="alert-box">
+                    <h4>⚠️ O Problema Crítico</h4>
+                    <p>
+                        Atualmente, o  monitoramento é  realizado de forma <strong>totalmente manual</strong> através da plataforma DSS Dahua. O sistema exibia apenas um contador geral no formato <strong style="color: #dc2626;">10</strong>/<strong style="color: #10b981;">234</strong> (10 câmeras offline em vermelho / 234 online em verde), mas <strong>não informava em qual unidade específica estava o problema</strong>.
+                    </p>
+                    <p style="margin-top: 12px;">
+                        Com <strong>mais de 500 unidades</strong> (Hubs, SOCs, Big Hubs e Fulfillment) espalhadas nacionalmente e esse número crescendo constantemente, os operadores precisavam <strong>abrir manualmente a árvore de dispositivos de cada unidade</strong>, uma por uma, procurando por um pequeno ponto vermelho que indicava a câmera offline.
+                    </p>
+                    <p style="margin-top: 12px;">
+                        Esse processo era <strong>extremamente demorado</strong> (podendo levar horas), <strong>suscetível a erros humanos</strong> (operadores pulavam unidades ou perdiam câmeras na navegação) e <strong>completamente ineficiente</strong>. Na maioria das vezes, câmeras offline só eram descobertas <strong>após incidentes já terem ocorrido.</strong>
+                </div>
+                
+                <div class="text-block">
+                    Com a criação do Painel, <strong>o processo será totalmente automatizado</strong>. A plataforma conecta-se diretamente à <strong>API oficial da Dahua DSS</strong>, realiza autenticação dupla com assinatura MD5, coleta e processa os dados em tempo real e apresenta em um painel interativo os status de todas as câmeras conectadas à rede:
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🟢</div>
+                        <div class="feature-name">Online</div>
+                        <div class="feature-description">
+                            Câmeras operando normalmente com transmissão ativa.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔴</div>
+                        <div class="feature-name">Offline</div>
+                        <div class="feature-description">
+                            Câmeras sem comunicação com o servidor DSS.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🟡</div>
+                        <div class="feature-name">Obstruídas</div>
+                        <div class="feature-description">
+                            Câmeras com campo de visão bloqueado detectado.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚨</div>
+                        <div class="feature-name">Em Alerta</div>
+                        <div class="feature-description">
+                            Combinação de falhas críticas requerendo ação imediata.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-block">
+                    O sistema ainda oferece <strong>autenticação individual por ID de operador</strong>, histórico completo de tratativas, chat integrado por câmera e painel consolidado de indicadores, garantindo <strong>transparência, rastreabilidade e eficiência</strong> em toda a operação.
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🏗️ Estrutura e Componentes Principais</h2>
+                
+                <div class="text-block">
+                    Cada módulo do sistema foi projetado para garantir <strong>controle total, rastreabilidade e escalabilidade operacional</strong>.
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔐</div>
+                        <div class="feature-name">Login e Autenticação</div>
+                        <div class="feature-description">
+                            Tela inicial com validação de senha para acesso seguro. Integração com fluxo de autenticação MD5 da API Dahua DSS. Exibição dinâmica do status de conexão (Conectado, Conectando, Erro).
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-name">Painel Principal</div>
+                        <div class="feature-description">
+                            Dashboard em tempo real com número total de câmeras e status (Online, Offline, Obstruídas, Alertas). Cartões com cores e animações para destacar alertas ativos.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-name">Filtros Dinâmicos</div>
+                        <div class="feature-description">
+                            Possibilidade de filtrar por unidade, hub, status ou nome da câmera. Categorias: Todas, Alertas, Offline, Obstruídas, Online.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📝</div>
+                        <div class="feature-name">Sistema de Tratativas</div>
+                        <div class="feature-description">
+                            Cada alerta exige reconhecimento obrigatório por operador identificado via ID pessoal (token de 4 dígitos). Registro automático de logs com rastreabilidade total.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <div class="feature-name">Chat Operacional</div>
+                        <div class="feature-description">
+                            Cada câmera possui chat interno vinculado ao histórico de tratativas, permitindo anotar procedimentos, responsáveis e etapas pendentes.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <div class="feature-name">Histórico de Auditoria</div>
+                        <div class="feature-description">
+                            Registro completo e imutável de todas as ações do sistema. Permite auditorias e rastreamento de falhas humanas ou técnicas.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🔧 Integração com API Dahua DSS</h2>
+                
+                <div class="text-block">
+                    A integração com a API oficial da Dahua DSS é o <strong>coração técnico</strong> do VisionSafe. O processo de autenticação e coleta de dados envolve múltiplas etapas complexas:
+                </div>
+
+                <div class="tech-flow">
+                    <div class="flow-step">
+                        <div class="flow-number">1</div>
+                        <div class="flow-content">
+                            <h4>Primeira Chamada de Autenticação</h4>
+                            <p>O sistema faz uma requisição POST para <code>/brms/api/v1.0/accounts/authorize</code> enviando apenas o nome de usuário. O servidor responde com código <code>401</code> e retorna dois valores críticos: <strong>realm</strong> e <strong>randomKey</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">2</div>
+                        <div class="flow-content">
+                            <h4>Cálculo da Assinatura MD5 Encadeada</h4>
+                            <p>A partir dos valores recebidos, o sistema executa 4 cálculos MD5 sequenciais:</p>
+                            <p style="margin-top: 10px;">
+                                <code>temp1 = MD5(password)</code><br>
+                                <code>temp2 = MD5(username + temp1)</code><br>
+                                <code>temp3 = MD5(temp2)</code><br>
+                                <code>temp4 = MD5(username:realm:temp3)</code><br>
+                                <code>signature = MD5(temp4:randomKey)</code>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">3</div>
+                        <div class="flow-content">
+                            <h4>Segunda Chamada com Assinatura</h4>
+                            <p>O sistema envia novamente uma requisição POST ao mesmo endpoint, agora incluindo <code>signature</code>, <code>randomKey</code> e <code>encryptType: "MD5"</code>. Se validado, o servidor retorna um <strong>token de sessão</strong>.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">4</div>
+                        <div class="flow-content">
+                            <h4>Coleta da Árvore de Dispositivos</h4>
+                            <p>Com o token válido, o sistema faz requisição GET para <code>/brms/api/v1.0/device/tree?orgCode=001</code> incluindo o header <code>X-Subject-Token</code>. O servidor retorna a estrutura hierárquica completa de dispositivos.</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">5</div>
+                        <div class="flow-content">
+                            <h4>Processamento Recursivo da Árvore</h4>
+                            <p>O sistema percorre recursivamente toda a árvore de dispositivos, identificando cada câmera (canal) individual, seu status online/offline e dados associados (unidade, nome, ID).</p>
+                        </div>
+                    </div>
+
+                    <div class="flow-step">
+                        <div class="flow-number">6</div>
+                        <div class="flow-content">
+                            <h4>Fallback Automático</h4>
+                            <p>Em caso de falha na conexão com o DSS, o sistema automaticamente ativa modo <strong>offline</strong> e carrega dados simulados (mocked) para garantir a continuidade operacional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>💡 Complexidade Técnica</h4>
+                    <p>
+                        A autenticação da API Dahua DSS é propositalmente complexa para garantir segurança. O sistema VisionSafe implementa <strong>toda essa cadeia de criptografia</strong> de forma transparente para o usuário, garantindo acesso seguro e automatizado aos dados em tempo real.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🔄 Antes vs Depois</h2>
+                
+                <div class="comparison-box">
+                    <div class="comparison-card comparison-before">
+                        <h4>❌ Processo Manual Anterior</h4>
+                        <ul>
+                            <li>Verificação manual percorrendo toda árvore do DSS</li>
+                            <li>Processo lento e suscetível a falhas humanas</li>
+                            <li>Falhas descobertas apenas após incidentes</li>
+                            <li>Zero rastreabilidade de ações</li>
+                            <li>Impossível auditar responsabilidades</li>
+                            <li>Comunicação verbal entre turnos</li>
+                            <li>Perda de evidências visuais críticas</li>
+                            <li>Sem histórico de tratativas</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card comparison-after">
+                        <h4>✅ Sistema Automatizado VisionSafe</h4>
+                        <ul>
+                            <li>Monitoramento automatizado em tempo real</li>
+                            <li>Detecção instantânea de falhas</li>
+                            <li>Alertas imediatos antes de qualquer incidente</li>
+                            <li>Rastreabilidade total de todas as ações</li>
+                            <li>Logs individuais por operador com ID</li>
+                            <li>Chat contextual por câmera</li>
+                            <li>Garantia de evidências visuais contínuas</li>
+                            <li>Histórico completo e auditável</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">🎯 Objetivos Alcançados</h2>
+                
+                <ul class="simple-objectives">
+                    <li><strong>Automatizar completamente</strong> o processo de monitoramento das câmeras DSS</li>
+                    <li><strong>Reduzir drasticamente</strong> o tempo de detecção de falhas (de horas para segundos)</li>
+                    <li><strong>Eliminar totalmente</strong> a necessidade de rondas manuais e verificações na árvore do DSS</li>
+                    <li><strong>Garantir rastreabilidade total</strong> das ações e tratativas por operador</li>
+                    <li><strong>Prover uma base de dados confiável</strong> para auditorias e relatórios operacionais</li>
+                    <li><strong>Melhorar significativamente</strong> a comunicação e continuidade entre turnos</li>
+                    <li><strong>Reduzir risco operacional</strong> com alertas visuais imediatos</li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">⚡ Desafios Técnicos & Soluções</h2>
+                
+                <table class="challenge-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%;">Desafio</th>
+                            <th>Solução Aplicada</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Autenticação complexa da API Dahua</strong><br>(duplo MD5 e randomKey)</td>
+                            <td>Implementação de sequência de autenticação com múltiplas chamadas e cálculo de hash MD5 encadeado em 4 etapas distintas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Processamento da árvore de dispositivos</strong><br>(estrutura hierárquica aninhada)</td>
+                            <td>Criação de parser recursivo que mapeia hierarquias, unidades e canais individuais, extraindo dados relevantes de cada nível.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Falhas na conexão com o DSS</strong><br>(instabilidade de rede)</td>
+                            <td>Implementação de fallback automático com dados simulados e sinalização visual clara de erro para o operador.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rastreabilidade de ações entre operadores</strong><br>(múltiplos turnos)</td>
+                            <td>Sistema de token individual (ID de 4 dígitos) e logs detalhados armazenando todas as tratativas e trocas de operador.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Comunicação entre turnos</strong><br>(perda de contexto)</td>
+                            <td>Módulo de chat contextual vinculado a cada câmera, preservando histórico completo das conversas e tratativas realizadas.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Interface intuitiva para alertas críticos</strong><br>(destaque visual)</td>
+                            <td>Cards com gradientes animados (pulse) e cores destacadas para alertas ativos, garantindo visibilidade imediata.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">📈 Impactos e Benefícios</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-name">100% de Automação</div>
+                        <div class="feature-description">
+                            Eliminação total da dependência de verificações manuais, reduzindo tempo e erro humano.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-name">Detecção Instantânea</div>
+                        <div class="feature-description">
+                            Redução de horas para segundos no tempo de identificação de câmeras inoperantes.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📋</div>
+                        <div class="feature-name">Base Auditável</div>
+                        <div class="feature-description">
+                            Criação de histórico automatizado e rastreável para auditorias e relatórios gerenciais.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">👁️</div>
+                        <div class="feature-name">Transparência Total</div>
+                        <div class="feature-description">
+                            Maior responsabilidade entre operadores com logs individuais e identificação por ID.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <div class="feature-name">Comunicação Eficiente</div>
+                        <div class="feature-description">
+                            Melhoria significativa na comunicação e continuidade entre turnos operacionais.
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-name">Risco Reduzido</div>
+                        <div class="feature-description">
+                            Risco operacional minimizado com alertas visuais imediatos e registro de todas as tratativas.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">💻 Stack Tecnológico</h2>
+                
+                <div class="tech-stack">
+                    <div class="tech-badge">React.js</div>
+                    <div class="tech-badge">Tailwind CSS</div>
+                    <div class="tech-badge">Node.js</div>
+                    <div class="tech-badge">API Dahua DSS (BRMS v1.0)</div>
+                    <div class="tech-badge">Crypto-JS (MD5)</div>
+                    <div class="tech-badge">React Hooks</div>
+                    <div class="tech-badge">Lucide React</div>
+                    <div class="tech-badge">REST API</div>
+                    <div class="tech-badge">WebSocket (planejado)</div>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">Detalhamento Técnico</h3>
+                    
+                    <div class="text-block">
+                        <strong>Frontend:</strong> Construído em React.js com Tailwind CSS para estilização rápida e responsiva. Utiliza React Hooks (useState, useEffect) para gerenciamento de estado local e efeitos colaterais.
+                    </div>
+
+                    <div class="text-block">
+                        <strong>Backend:</strong> Node.js gerenciando requisições à API Dahua DSS, implementando lógica de autenticação e processamento de dados.
+                    </div>
+
+                    <div class="text-block">
+                        <strong>Integração:</strong> API oficial Dahua DSS (BRMS v1.0) com autenticação MD5 dupla implementada via Crypto-JS.
+                    </div>
+
+                    <div class="text-block">
+                        <strong>UI/UX:</strong> Design system com Lucide React para ícones interativos. Layout responsivo com destaque visual para alertas críticos e feedback de sistema em tempo real.
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                
+                
+                <div class="highlight-box">
+                    <h4>💡 Visão Nacional em Tempo Real</h4>
+                    <p>
+                        A Central de Controle tera uma <strong>visão nacional e em tempo real</strong> do status de todas as câmeras – com alertas imediatos, tratativas registradas e histórico completo para auditorias e relatórios operacionais.
+                    </p>
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <div class="footer-title">SHOPEE LOGISTICS · SECURITY SYSTEMS</div>
+            <p>DSS Monitor – Sistema de Monitoramento Automatizado de Câmeras</p>
+            <p>Desenvolvido por Renata C. | Analista de Segurança & Desenvolvimento</p>
+            <p style="margin-top: 20px; font-size: 13px; opacity: 0.8;">
+                © 2025 Shopee Brasil – Documentação Técnica Proprietária
+            </p>
+        </div>
+    </div>
+</body>
+</html>
